@@ -1,0 +1,123 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+	padding-top : 40px !important;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+body {
+    padding-left: 15px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers -----------------------------------------------------------*/ 
+.field-validation-error { color: #f00; }
+.field-validation-valid { display: none; }
+.input-validation-error { border: 1px solid #f00; background-color: #fee; }
+.validation-summary-errors { font-weight: bold; color: #f00; }
+.validation-summary-valid { display: none; }
+
+
+/* Стили для схемы зала
+-----------------------------------------------------------*/
+
+.dyn-area {
+    left: 280px;
+    width: 700px;
+    min-height: 437px; 
+    
+    margin-top: 56px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    border: solid 1px lightgray; 
+    position: relative;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+
+    background-color: #f0f0f0;
+}
+
+.hall {
+    position: absolute;
+    background-color: #f0f0f0;
+}
+
+.seat-free {
+    background-color: #a6e86c;    
+    border: solid 3px green; 
+    border-radius:6px;
+    position: absolute;
+    opacity: 0.8;    
+}
+.seat-reserv {
+    background-color: #517689;    
+    border: solid 3px #315669; 
+    border-radius:6px;
+    position: absolute;
+    opacity: 0.8;
+}
+.seat-sold {
+    background-color: #ddd;    
+    border: solid 3px #aaa; 
+    border-radius:6px;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.scene {
+    background-color: #558ecf;    
+    border: solid 3px #356eaf; 
+    border-radius:6px;
+ 
+    position: absolute;
+    text-align:  center;
+    opacity: 0.8;
+}
+
+
+.left-result {
+    margin-bottom: 50px;
+
+/*    float: left;
+    background-color: #ddd;
+    width: 150px;
+    min-height: 300px;
+    */
+}
+
+.validation-summary-valid { display: none; }
+

@@ -1,0 +1,35 @@
+﻿@model СистемаРезервированияБилетов.Models.Резервирование.ДанныеПодтверждения
+
+
+@Html.DropDownList("ТипОперации", new List<SelectListItem>(new[] { new SelectListItem() { Text = "Покупка" }, new SelectListItem() { Text = "Бронирование" }}), new {@id="drop_list"})
+
+<div>
+    <b>Нажмите кпопку "Далее" для подтверждения операции:</b>
+    <br />
+    <span id="oper_type">Покупка </span> @Model.ВыбранныеБилеты.Count()  @(Model.ВыбранныеБилеты.Count() == 1 ? "билета" : "билетов")
+    <br />
+    @{
+    decimal суммаЗаказа = 0m;
+    <div>
+
+        @foreach (var билет in Model.ВыбранныеБилеты)
+        {
+
+            if (билет.Место.Row != null)
+            {
+                @Html.Raw(string.Format("Ряд: {0}, Место: {1}, Стоимость: {2} руб.", билет.Место.Row, билет.Место.Seat, билет.Price.ToString("N2")));
+            }
+            else
+            {
+                @Html.Raw(string.Format("Стоимость: {0} руб.", билет.Price.ToString("N2")));
+            }
+            <br />
+
+            суммаЗаказа += билет.Price;
+
+        }
+        На сумму: @суммаЗаказа.ToString("N2") руб.
+    </div>
+
+    }
+</div>

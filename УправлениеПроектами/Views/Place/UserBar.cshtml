@@ -1,0 +1,17 @@
+﻿@model УправлениеБД.Пользователь
+
+@if (Model != null)
+{
+    <ul class="nav nav-list" style="text-align:start">
+    <li class="nav-header">Профиль</li>
+    <li class="active">@Model.Name</li>
+    <li class="active">@Model.Surname</li>
+    <li class="active">@Model.Email</li>
+    <li class="active">@Model.Organization</li>
+    </ul>
+}
+else
+{
+    <h6>Вы еще не зарегистрировались?</h6>           
+    <span class="btn btn-primary btn-large">@Html.ActionLink("Зарегистрироваться »", "Register", "User")</span>
+}

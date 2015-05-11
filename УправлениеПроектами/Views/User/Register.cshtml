@@ -1,0 +1,68 @@
+﻿@model УправлениеПроектами.Models.КлассыДляФормВвода.ПользовательРегистрации
+
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Регистрация</h2>
+        @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="Email">
+                        Заполните Email, который будет использоваться для входа в систему
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Email")
+                        @Html.TextBox("Email", Model.Email)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Password">
+                        Заполните пароль
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Password")
+                        @Html.Password("Пароль", Model.Пароль)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ConfirmPassword">
+                        Повторите пароль
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("ConfirmPassword")
+                        @Html.Password("ПодтверждениеПароля", Model.ПодтверждениеПароля)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Name">
+                        Введите имя
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Name")
+                        @Html.TextBox("Имя", Model.Имя)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Surname">
+                        Введите фамилию
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Surname")
+                        @Html.TextBox("Фамилия", Model.Фамилия)
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Зарегистрироваться
+                    </button>
+                    @Html.ActionLink("Отмена", "Index", "Home", null, new { @class = "btn" })
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

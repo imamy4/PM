@@ -1,0 +1,11 @@
+﻿@model УправлениеБД.Зал
+
+@{
+    ViewBag.Title = "Place";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Place</h2>
+@Model.Address
+@Model.SeatsCount
+@Html.ActionLink("дизайнер", "Reservation", "Reservation", new { id = Model.Id })

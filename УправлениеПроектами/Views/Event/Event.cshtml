@@ -1,0 +1,98 @@
+﻿@model МенеджерБД.Домен.Проект
+
+@{
+    ViewBag.Title = @Model == null ? "Ошибочка" : "Проект: " + @Model.Название;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+   
+     @if(Model != null)
+     { 
+
+        <h2>@Model.Название</h2>
+
+        <div class="item">
+            <div style="width: 500px; min-height: 300px; background-color: #cfcfff; float: left; margin-right: 20px; font-size:larger; font-family:Calibri">
+                @Model.Description
+            </div>
+            <div style="min-height: 250px;">
+                <div>
+                    <div class="событие">
+                        <b>Дата события</b>
+                    </div>
+                    <ul>
+                        <li>
+                            @Model.EventStart
+                        </li>
+                        <li class="событие">
+                            @Model.EventEnd
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="событие">
+                        <b>Место проведения</b>
+                    </div>
+                    <ul>
+                        <li class="событие">
+                            @Model.Зал.Name
+                        </li>
+                        <li class="событие">
+                            @Model.Зал.Address
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    @if (@Model.ЕстьБилеты)
+                {
+                        <div class="событие">
+                            <b>Стоимость билетов</b>
+                        </div>
+                        <ul>
+                            @if (@Model.МинимальнаяЦенаНаБилет == @Model.МаксимальнаяЦенаНаБилет)
+                        {
+                                <li>@Model.МинимальнаяЦенаНаБилет.ToString("F") руб.</li>
+                        }
+                        else
+                        {
+                                <li>@Model.МинимальнаяЦенаНаБилет.ToString("F") - @Model.МаксимальнаяЦенаНаБилет.ToString("F") руб.</li>
+                        }
+                        </ul>
+                }
+                else
+                {
+                        <div>
+                            <b>Билетов на мероприятие нет.</b>
+                        </div>
+                }
+                </div>
+            </div>
+        </div>
+   
+            if (@Model.ЕстьБилеты && @Model.Зал.Hall != null)
+            { 
+                <div>
+                    @Html.ActionLink("Купить или забронировать билет", "Reservation", "Reservation", new { id = @Model.Id }, null)
+                </div>
+            }
+            else
+            {
+                if (@Model.Зал.Hall == null)
+                {
+                    <div>
+                        <b>Нельзя забронировать билеты на данное мероприятие</b>
+                    </div>
+                }
+            }
+        
+        }
+        else
+        {
+            <h2>Извините, по данному запросу не найдено мероприятия</h2>
+
+            <div>
+                @Html.ActionLink("Вернуться к списку событий", "Index")
+            </div>
+    }
+</div>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Успешная регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Вы успешно зарегистрировались в системе.</h2>
+        <p>
+            Теперь Вы можете пользоваться всеми функциями системы TEROS.
+        </p>
+        <p>
+            <span class="btn btn-primary btn-large">@Html.ActionLink("На главную »", "Index", "Home")</span>
+        </p>
+    </div>
+</div>

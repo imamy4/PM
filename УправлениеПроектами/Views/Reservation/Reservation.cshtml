@@ -1,0 +1,66 @@
+﻿@using СистемаРезервированияБилетов.Models.Резервирование
+@model ДанныеРезервирования
+
+@{
+    ViewBag.Title = "Резервирование билетов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row-fluid">
+
+        @if (Model != null)
+        {
+            <h4>Резервирование билетов на мероприятие: "@Model.НазваниеСобытия"</h4>
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+
+                <div class="left-result" id="left_result">
+                    Выберите места
+                </div>
+
+                @if (Model.ТекущийСтатус == СтатусРезервирования.УдачнаяТранзакция || Model.ТекущийСтатус == СтатусРезервирования.НеудачнаяТранзакция)
+                {
+                    @Html.ActionLink("Вернуться к списку мероприятий", "index", "event")
+                }
+                else
+                { 
+                    using (Html.BeginForm("Reservation", "Reservation", FormMethod.Post))
+                    {
+                        @Html.TextBox("ПолученнаяИнформацияОтПользователя", Model.ПолученнаяИнформацияОтПользователя, new { @id = "resOperation"/*, @style = "position: absolute; height: 0px; width: 0px; left: -4000px; top: -4000px"*/ , @type = "hidden" })
+
+                        <button id="submitBut" type="submit" class="btn btn-primary">
+                            Далее
+                        </button>
+                    }
+                }
+            </div>
+        </div>
+                        <div class="dyn-area">
+                            @switch (Model.ТекущийСтатус)
+                {
+                    case СтатусРезервирования.ВводДанных:
+                                    @Html.Action("Scene", new { id = Model.IdСобытия });
+                                                                   break;
+                    case СтатусРезервирования.Подтверждение:
+                    @Html.Action("Confirm", new { id = @Model.IdСобытия + "|" + @Model.ПолученнаяИнформацияОтПользователя });
+                                                                                                                        break;
+                    case СтатусРезервирования.УдачнаяТранзакция:
+                    <span>@Model.ТекущийТипОперации.ToString() @(Model.ТекущийТипОперации == ТипОперации.Покупка ? "прошла" : "прошло") успешно!</span>
+                                                                                                                        break;
+                    case СтатусРезервирования.НеудачнаяТранзакция:
+                    <span>@Model.ТекущийТипОперации.ToString() не прошло</span>
+                                                                                                                        break;
+
+                }
+
+                        </div>
+        }
+        else
+        {
+            <h2>мероприятия не найдено</h2>
+        }
+    </div>
+    </div>
+@Scripts.Render("~/bundles/reservation")

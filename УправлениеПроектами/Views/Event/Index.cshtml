@@ -1,0 +1,35 @@
+﻿@model IEnumerable<МенеджерБД.Домен.Проект>
+
+@{
+    ViewBag.Title = "Все проекты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                @Html.Action("UserBar", "Place")
+            </div>
+            <div class="well sidebar-nav">
+                <h2>Места</h2>
+                <p>Просмотр всех доступных местоположений в городе.</p>
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Все места »", "Index", "Home")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <li class=" hero-unit" style="margin-top:45px">
+                <h2>События в нашем городе</h2>
+                <ul class="nav nav-list">
+                    @foreach (var проект in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@проект.Название, "Projects", new { id = @проект.Id })</li>
+                        <li class="nav" style="text-align:end;font-size:12px;">Проходит в Бла-бла</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+        </div>
+    </div>
+</div>

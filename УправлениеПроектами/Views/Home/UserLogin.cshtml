@@ -1,0 +1,14 @@
+﻿@model МенеджерБД.Домен.Пользователь
+
+@if (Model != null)
+{
+    <li><span class="btn btn-link">@Html.ActionLink("Домой","Index","Home")</span></li>
+    <li><span class="btn btn-link">@Model.Email</span></li>
+    <li><span class="btn btn-link">@Html.ActionLink("Выход", "Logout", "Login")</span></li>
+}
+else
+{
+    <!--<li>Html.ActionLink("Вход", "Index", "Login")</li>-->
+    <li><span class="btn btn-link" id="LoginPopup">Вход</span></li>
+    <li><span class="btn btn-link">@Html.ActionLink("Регистрация", "Register", "User")</span></li>
+}

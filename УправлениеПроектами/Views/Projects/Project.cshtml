@@ -1,0 +1,36 @@
+﻿@model МенеджерБД.Домен.Проект
+
+@{
+    ViewBag.Title = @Model == null ? "Ошибочка" : "Проект: " + @Model.Название;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("К списку »", "Index")</span>
+                </p>
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый проект »", "Create")</span>
+                </p>
+            </div>
+        </div>
+
+        @if (Model != null)
+        {
+            <div class="span9">
+                <div class="hero-unit" style="margin-top:45px">
+                    <h2>@Model.Название</h2>
+                    <p>@Model.Описание</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h2>Извините, по данному запросу не найден проект</h2>
+        }
+
+    </div>
+</div>

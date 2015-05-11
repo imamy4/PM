@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!--Styles.Render("~/Content/Style.css")-->
+    <!--Styles.Render("~/Content/themes/base/css", "~/Content/css")-->
+    <!--script src="//ui/1.10.4/jquery-ui.js"></!--script>-->
+    @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+</head>
+
+<body>
+<!--Панель навигации-------------------------------------------->
+     <div class="navbar navbar-fixed-top" style="width:1000px;margin:0 auto">
+         <div class="navbar-inner">
+             <div class="container">
+                 <a class="brand">Система управления проектами</a>
+                 <ul class="nav nav-pills pull-right">
+                     @Html.Action("UserLogin", "Home")
+                 </ul>                                   
+             </div>
+         </div>
+     </div>
+<!---------------------------------------------------------------->
+ 
+    @RenderBody()
+    <div id="PopupWrapper"></div>
+    @Scripts.Render("~/bundles/jquerydev")
+    @Scripts.Render("~/bundles/jquerydevui")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerydevuidate")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
+    @Styles.Render("~/Content/css/jquerydevui")
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

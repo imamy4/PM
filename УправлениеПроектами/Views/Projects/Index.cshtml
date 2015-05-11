@@ -1,0 +1,36 @@
+﻿@model IEnumerable<МенеджерБД.Домен.Проект>
+
+@{
+    ViewBag.Title = "Проекты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    Поиск
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый проект »", "Create")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                <h2>Доступные проекты</h2>
+                <ul class="nav nav-list">
+                    @foreach (var проект in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@проект.Название, "Project", "Projects", new { id = @проект.Id }, null)</li>
+                        <li class="nav" style="text-align:end;font-size:12px;">Крайний срок @проект.ДатаКонца.ToShortDateString()</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

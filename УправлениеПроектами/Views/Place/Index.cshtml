@@ -1,0 +1,34 @@
+﻿@model IEnumerable<УправлениеБД.Зал>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                @Html.Action("UserBar", "Place")
+            </div>
+            <div class="well sidebar-nav">
+                <h2>События</h2>
+                <p>Просмотр всех событий в городе.</p>
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Все события »", "Index", "Event")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <li class="hero-unit" style="margin-top:45px">
+                <h2>Места в нашем городе</h2>
+                <ul class="nav nav-list">
+                    @foreach (var зал in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@зал.Name, "Place", new { id = @зал.Id })</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+        </div>
+    </div>
+</div>
