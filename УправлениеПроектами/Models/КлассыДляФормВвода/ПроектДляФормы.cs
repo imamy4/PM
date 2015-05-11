@@ -14,7 +14,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
 
         public DateTime ДатаНачала
         {
-            get 
+            get
             {
                 return new DateTime(ГодДатаНачала, МесяцДатаНачала, ДеньДатаНачала);
             }
@@ -51,7 +51,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
                     yield return new SelectListItem
                     {
                         Value = i.ToString(),
-                        Text = new DateTime(2000, i, 1).ToString("MMMM"),
+                        Text = new DateTime(2013, i, 1).ToString("MMMM"),
                         Selected = МесяцДатаНачала == i
                     };
                 }
@@ -62,7 +62,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
         {
             get
             {
-                for (int i = 2000; i <= DateTime.Now.Year; i++)
+                for (int i = 2013; i <= DateTime.Now.Year + 2; i++)
                 {
                     yield return new SelectListItem
                     {
@@ -76,9 +76,9 @@ namespace УправлениеПроектами.Models.КлассыДляФор
 
         public DateTime ДатаКонца
         {
-            get 
+            get
             {
-                return new DateTime(ГодДатаКонца, МесяцДатаКонца, ДеньДатаКонца);
+                return new DateTime(ГодДатаКонца, МесяцДатаКонца, ДеньДатаКонца, 23, 59, 59);
             }
         }
 
@@ -113,7 +113,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
                     yield return new SelectListItem
                     {
                         Value = i.ToString(),
-                        Text = new DateTime(2000, i, 1).ToString("MMMM"),
+                        Text = new DateTime(2013, i, 1).ToString("MMMM"),
                         Selected = МесяцДатаКонца == i
                     };
                 }
@@ -124,7 +124,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
         {
             get
             {
-                for (int i = 2000; i <= DateTime.Now.Year; i++)
+                for (int i = 2013; i <= DateTime.Now.Year + 2; i++)
                 {
                     yield return new SelectListItem
                     {

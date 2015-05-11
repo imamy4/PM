@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Mvc;
+using МенеджерБД;
 using МенеджерБД.Домен;
 
 namespace УправлениеПроектами.Models.КлассыДляФормВвода
 {
     public abstract class БазоваяМодельСущностиБД<T> where T: IЗаписьБД, new ()
     {
+        public IМенеджерБД МенеджерБД 
+        {
+            get
+            {
+                return DependencyResolver.Current.GetService<IМенеджерБД>();
+            }
+        }
+
         public virtual T ПеревестиВСущностьБД()
         {
             T сущность = new T();
