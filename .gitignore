@@ -1,0 +1,6 @@
+*.suo
+*/bin/Debug
+*/obj/Debug
+/УправлениеПроектами/bin
+/УправлениеПроектами/development-bundle
+/УправлениеПроектами/*.user
