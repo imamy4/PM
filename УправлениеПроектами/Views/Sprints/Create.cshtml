@@ -1,0 +1,63 @@
+﻿@model УправлениеПроектами.Models.КлассыДляФормВвода.СпринтДляФормы
+
+@{
+    ViewBag.Title = "Создание проекта";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Создание проекта</h2>
+        @using (Html.BeginForm("Create", "Sprints", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="IdПроекта">
+                        Выберете проект
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("IdПроекта")
+                        @Html.DropDownList("IdПроекта", Model.ПроектыSelectList)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Название">
+                        Введите наименование
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Название")
+                        @Html.TextBox("Название", Model.Название)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ДатаНачала">
+                        Введите дату начала спринта
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("ДатаНачала")
+                        @Html.DropDownList("ДеньДатаНачала", Model.ДеньДатаКонцаSelectList)
+                        @Html.DropDownList("МесяцДатаНачала", Model.МесяцДатаНачалаSelectList)
+                        @Html.DropDownList("ГодДатаНачала", Model.ГодДатаНачалаSelectList)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="ДатаКонца">
+                        Введите дату окончания спринта
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("ДатаКонца")
+                        @Html.DropDownList("ДеньДатаКонца", Model.ДеньДатаКонцаSelectList)
+                        @Html.DropDownList("МесяцДатаКонца", Model.МесяцДатаКонцаSelectList)
+                        @Html.DropDownList("ГодДатаКонца", Model.ГодДатаКонцаSelectList)
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Содать новый спринт
+                    </button>
+                    @Html.ActionLink("Отмена", "Index", "Sptints", null, new { @class = "btn" })
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

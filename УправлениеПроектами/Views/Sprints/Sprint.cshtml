@@ -1,0 +1,44 @@
+﻿@model МенеджерБД.Домен.Спринт
+
+@{
+    ViewBag.Title = @Model == null ? "Ошибочка" : "Спринт: " + @Model.Название;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("К списку »", "Index")</span>
+                </p>
+                <br />
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    Список задач спринта
+                </p>
+            </div>
+        </div>
+
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                @if (Model != null)
+                {
+                    <h2>@Model.Название</h2>
+
+                    <p>
+                        Список задач по людям
+                    </p>
+                }
+                else
+                {
+                    <h2>Извините, по данному запросу не найден спринт.</h2>
+                }
+            </div>
+        </div>
+    </div>
+</div>

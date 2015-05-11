@@ -1,0 +1,37 @@
+﻿@model IEnumerable<МенеджерБД.Домен.Спринт>
+
+@{
+    ViewBag.Title = "Спринты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    Поиск спринта
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                <h2>Доступные спринты</h2>
+                <ul class="nav nav-list">
+                    @foreach (var спринт in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@спринт.Название, "Sprint", "Sprints", new { id = @спринт.Id }, null)</li>
+                        <li style="text-align:end;font-size:12px;">Проект: Название проекта</li>
+                        <li style="text-align:end;font-size:12px;">Cроки: @спринт.ДатаНачала.ToShortDateString() - @спринт.ДатаКонца.ToShortDateString()</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

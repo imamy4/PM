@@ -155,6 +155,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SpintsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -168,10 +169,12 @@
     <Compile Include="Global\Auth\ПровайдерПользователя.cs" />
     <Compile Include="Global\NHibernate\NHelpers.cs" />
     <Compile Include="Global\NHibernate\NHIbernateHttpModule.cs" />
+    <Compile Include="Helpers\DataBase\РасширениеМенеджераБД.cs" />
     <Compile Include="Models\КлассыДляФормВвода\БазоваяМодельСущностиБД.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ДанныеВходаВСистему.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПользовательРегистрации.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПроектДляФормы.cs" />
+    <Compile Include="Models\КлассыДляФормВвода\СпринтДляФормы.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -764,6 +767,10 @@
     <Content Include="Views\Projects\Project.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Success.cshtml" />
+    <Content Include="Views\Sprints\Index.cshtml" />
+    <Content Include="Views\Sprints\Sprint.cshtml" />
+    <Content Include="Views\Sprints\Create.cshtml" />
+    <Content Include="Views\Sprints\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,14 @@
+﻿@model МенеджерБД.Домен.Спринт
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Спринт успешно создан.</h2>
+        <p>
+            <span class="btn btn-primary btn-large">@Html.ActionLink("К странице спринта »", "Sprint", "Sprints", new { id = @Model.Id }, null)</span>
+        </p>
+    </div>
+</div>
