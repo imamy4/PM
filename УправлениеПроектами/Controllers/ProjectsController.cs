@@ -10,27 +10,40 @@ namespace УправлениеПроектами.Controllers
 {
     public class ProjectsController : BaseController
     {
+        /// <summary>
+        /// Выводит актуальные проекты.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            return View(МенеджерБД.Записи<Проект>());
+            return View(МенеджерБД.Записи<Проект>().Where(проект => проект.ДатаНачала <= DateTime.Now && проект.ДатаКонца >= DateTime.Now));
         }
 
+        /// <summary>
+        /// Основная страница конкретного проекта
+        /// </summary>
+        /// <param name="id">Id проекта</param>
+        /// <returns></returns>
         public ActionResult Project(int id)
         {
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
         }
 
-        public ActionResult UserBar()
-        {
-            return View(ТекущийПользователь);
-        }
-
+        /// <summary>
+        /// Страница создания нового проекта
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             ПроектДляФормы новыйПроект = new ПроектДляФормы();
             return View(новыйПроект);
         }
 
+        /// <summary>
+        /// Страница создания нового проекта, с проверкой на валидность введенных значений
+        /// </summary>
+        /// <param name="проект"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Create(ПроектДляФормы проект)
         {
@@ -60,6 +73,11 @@ namespace УправлениеПроектами.Controllers
             return View(проект);
         }
 
+        /// <summary>
+        /// Страница с уведомлением об удачном создании проекта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Success(int id)
         {
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
