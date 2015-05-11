@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
+  
+  <class name="КатегорияТребования" table="pm.US_Categories">
+    <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
+    <property name="Название" column="Name" />
+  </class>
+  
+</hibernate-mapping>

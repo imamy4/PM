@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
+  
+  <class name="Спринт" table="pm.Sprints">
+    <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
+    <property name="IdПроекта" column="Project_id" />
+    <property name="Название" column="Name" />
+    <property name="ДатаНачала" column="DateStart" />
+    <property name="ДатаКонца" column="DateFinish" />
+  </class>
+  
+</hibernate-mapping>
