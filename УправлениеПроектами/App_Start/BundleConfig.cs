@@ -30,6 +30,12 @@ namespace УправлениеПроектами
             // основной скриптовый файл приложения
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/CustomScripts/app.js"));
+            // ExtJS
+            bundles.Add(new ScriptBundle("~/bundles/ExtJS").Include(
+              "~/Scripts/ExtJS/ext-all-debug.js"));
+            bundles.Add(new StyleBundle("~/Content/css/ExtJS").Include(
+             "~/Scripts/ExtJS/resources/css/ext-all.css"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-1.*"));

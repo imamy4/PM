@@ -711,8 +711,11 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\reservation.js" />
-    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\CustomScripts\app.js" />
+    <Content Include="Scripts\ExtJS\ext-all-debug.js" />
+    <Content Include="Scripts\ExtJS\resources\css\ext-all.css" />
+    <Content Include="Scripts\CustomScripts\reservation.js" />
+    <Content Include="Scripts\CustomScripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -735,7 +738,7 @@
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
-    <Content Include="Scripts\user-login.js" />
+    <Content Include="Scripts\CustomScripts\user-login.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UserLogin.cshtml" />
