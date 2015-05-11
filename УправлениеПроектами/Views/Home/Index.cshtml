@@ -1,7 +1,7 @@
 ﻿@model МенеджерБД.Домен.Пользователь
 
 @{
-    ViewBag.Title = "Система резервирования билетов";
+    ViewBag.Title = "Система управления проектами";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -38,94 +38,4 @@
 else
 {
     <h2>НУЖНО ОРГАНИЗОВАТЬ ФОРМИРОВАНИЕ РАБОЧЕГО СТОЛА ПО РОЛЯМ</h2>
-    int i = 0;
-    //for (; !Model.ИмеетРоль(i); i++) { }
-
-    //FirstOrDefault(rp => rp.UserId == Model.Id);
-    switch (i)
-    {
-        case 1:
-         <div class="container">
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
-                        <ul class="nav nav-list" style="text-align:start">
-                            <li class="nav-header">Профиль</li>
-                            <li class="active">@Model.Имя</li>
-                            <li class="active">@Model.Фамилия</li>
-                            <li class="active">@Model.Email</li>
-                        </ul>
-                    </div> 
-                </div>
-                <div class="span9">
-                    <div class=" hero-unit" style="margin-top:45px">
-                        <ul class="nav nav-list">
-                            <li class="nav-header">Предстоящие события</li>
-                            <!--foreach (var Cобытие in Model)
-                            { -->
-                            <li class="active">Событие 1</li>
-                            <li class="active">Событие 2</li>
-                            <li class="active">Событие 3</li>
-                            <li class="active">Событие 4</li>
-                            <li class="active">Событие 5</li>
-                            <li class="active">Событие 6</li>
-                            <li class="active">Событие 7</li>
-                            <li class="active">Событие 8</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-         </div>
-            break;
-        case 2: 
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
-                        <ul class="nav nav-list" style="text-align:start">
-                            <li class="nav-header">Профиль</li>
-                            <li class="active">@Model.Имя</li>
-                            <li class="active">@Model.Фамилия</li>
-                            <li class="active">@Model.Email</li>
-                        </ul>
-                    </div> 
-                </div>
-                <div class="span9">
-                    <div class=" hero-unit" style="margin-top:45px">
-                        <ul class="nav nav-list">
-                            <li class="nav-header">Предстоящие события</li>
-                            <!--foreach (var Cобытие in Model)
-                            { -->
-                            <li class="active">Событие 1</li>
-                            <li class="active">Событие 2</li>
-                            <li class="active">Событие 3</li>
-                            <li class="active">Событие 4</li>
-                            <li class="active">Событие 5</li>
-                            <li class="active">Событие 6</li>
-                            <li class="active">Событие 7</li>
-                            <li class="active">Событие 8</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row" style="margin-bottom:45px">
-                <div class="span6">
-                    <h2>События</h2>
-                    <p>Просмотр всех предстоящих событий в городе</p>
-                    <p>
-                        <span class="btn btn-large">@Html.ActionLink("Все события »", "Index", "Event")</span>
-                    </p>
-                </div>
-                <div class="span6">
-                    <h2>Места</h2>
-                    <p>Просмотр всех доступных местоположений в городе</p>
-                    <p>
-                        <span class="btn btn-large">@Html.ActionLink("Все события »", "Index", "Event")</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-            break;
-    }
 }

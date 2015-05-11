@@ -12,25 +12,35 @@
                 <p>
                     <span class="btn btn-primary btn-large">@Html.ActionLink("К списку »", "Index")</span>
                 </p>
+                <br />
                 <p>
                     <span class="btn btn-primary btn-large">@Html.ActionLink("Новый проект »", "Create")</span>
                 </p>
             </div>
+            <div class="well sidebar-nav">
+                <p>
+                    Список спринтов
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    Бэклог
+                </p>
+            </div>
         </div>
 
-        @if (Model != null)
-        {
-            <div class="span9">
-                <div class="hero-unit" style="margin-top:45px">
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                @if (Model != null)
+                {
                     <h2>@Model.Название</h2>
                     <p>@Model.Описание</p>
-                </div>
+                }
+                else
+                {
+                    <h2>Извините, по данному запросу не найден проект.</h2>
+                }
             </div>
-        }
-        else
-        {
-            <h2>Извините, по данному запросу не найден проект</h2>
-        }
-
+        </div>
     </div>
 </div>

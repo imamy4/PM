@@ -40,6 +40,15 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/common")
     @Styles.Render("~/Content/css/jquerydevui")
+
+    <!--подключение ExtJS------------------------------------------>    
+    @*@Styles.Render("~/Content/css/ExtJS")*@
+    @*@Scripts.Render("~/bundles/ExtJS")*@
+    <!--основной скриптовый файл приложения------------------------>
+    @Scripts.Render("~/bundles/app")
+
+
+
     @RenderSection("scripts", required: false)
 </body>
 
