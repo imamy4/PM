@@ -22,10 +22,14 @@ namespace УправлениеПроектами
                     .Include("~/Content/bootstrap*"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
-                "~/Scripts/common.js"));
+                "~/Scripts/CustomScripts/common.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/reservation").Include(
-                "~/Scripts/reservation.js"));
+                "~/Scripts/CustomScripts/reservation.js"));
+
+            // основной скриптовый файл приложения
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                "~/Scripts/CustomScripts/app.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-1.*"));
