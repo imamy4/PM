@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
 
-  <class name="Пользователь" table="pm.Users">
+  <class name="Пользователь" table="pm.Users" lazy="false">
     <id name="Id" type="Int32" unsaved-value="0" generator="increment" />
     <property name="Имя" column="Name" />
     <property name="Фамилия" column="Surname" />
@@ -9,6 +9,19 @@
     <property name="ХэшПароля" column="PasswordHash" />
     <property name="ДатаРегистрации" column="DateCreate" />
     <property name="ДатаИзменения" column="DateEdit" />
+
+    <set name="СозданныеТребования" lazy="false">
+      <key column="Author_id" />
+      <one-to-many class="Требование"/>
+    </set>
+    <set name="СозданныеЗадачи" lazy="false">
+      <key column="Author_id" />
+      <one-to-many class="Задача"/>
+    </set>
+    <set name="НазначенныеЗадачи" lazy="false">
+      <key column="Current_executor_id" />
+      <one-to-many class="Задача"/>
+    </set>
   </class>
 
 </hibernate-mapping>

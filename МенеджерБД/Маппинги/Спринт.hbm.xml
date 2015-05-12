@@ -1,12 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
-  
-  <class name="Спринт" table="pm.Sprints">
+
+  <class name="Спринт" table="pm.Sprints" lazy="false">
     <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
-    <property name="IdПроекта" column="Project_id" />
     <property name="Название" column="Name" />
     <property name="ДатаНачала" column="DateStart" />
     <property name="ДатаКонца" column="DateFinish" />
+
+    <many-to-one name="Проект" column="Project_id" />
+
+    <set name="Требования" lazy="false">
+      <key column="Sprint_id" />
+      <one-to-many class="Требование"/>
+    </set>
+    <set name="Задачи" lazy="false">
+      <key column="Sprint_id" />
+      <one-to-many class="Задача"/>
+    </set>
   </class>
-  
+
 </hibernate-mapping>

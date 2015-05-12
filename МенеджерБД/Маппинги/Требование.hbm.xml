@@ -1,16 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
   
-  <class name="Требование" table="pm.User_stories">
+  <class name="Требование" table="pm.User_stories" lazy="false">
     <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
-    <property name="IdПроекта" column="Project_id" />
-    <property name="IdСпринта" column="Sprint_id" />
-    <property name="IdАвтора" column="Author_id" />
-    <property name="IdКатегории" column="Category_id" />
     <property name="Название" column="Name" />
     <property name="Описание" column="Description" />
     <property name="Оценка" column="Estimate" />
     <property name="Важность" column="Importance" />
+
+    <many-to-one name="Проект" column="Project_id" />
+    <many-to-one name="Спринт" column="Sprint_id" />
+    <many-to-one name="Автор" column="Author_id" />
+    <many-to-one name="Категория" column="Category_id" />
+
+    <set name="Задачи" lazy="false">
+      <key column="User_story_id" />
+      <one-to-many class="Задача"/>
+    </set>
   </class>
   
 </hibernate-mapping>
