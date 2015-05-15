@@ -16,7 +16,7 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View(МенеджерБД.Записи<Спринт>().Where(проект => проект.ДатаНачала <= DateTime.Now && проект.ДатаКонца >= DateTime.Now));
+            return View(МенеджерБД.АктуальныеСпринты());
         }
 
         /// <summary>

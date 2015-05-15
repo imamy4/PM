@@ -21,5 +21,17 @@ namespace УправлениеПроектами
                 .Where(проект => проект.ДатаНачала <= DateTime.Now
                         && проект.ДатаКонца >= DateTime.Now);
         }
+        
+        /// <summary>
+        /// Возвращает список актуальных спринтов
+        /// </summary>
+        /// <param name="менеджерБД"></param>
+        /// <returns></returns>
+        public static IEnumerable<Спринт> АктуальныеСпринты(this IМенеджерБД менеджерБД)
+        {
+            return менеджерБД.Записи<Спринт>()
+                .Where(спринт => спринт.ДатаНачала <= DateTime.Now
+                        && спринт.ДатаКонца >= DateTime.Now);
+        }
     }
 }
