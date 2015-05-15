@@ -15,7 +15,7 @@
             </div>
             <div class="well sidebar-nav">
                 <p>
-                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
+                    <span class="btn btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
                 </p>
             </div>
         </div>
@@ -25,8 +25,8 @@
                 <ul class="nav nav-list">
                     @foreach (var спринт in Model)
                     {
-                        <li class="active">@Html.ActionLink(@спринт.Название, "Sprint", "Sprints", new { id = @спринт.Id }, null)</li>
-                        <li style="text-align:end;font-size:12px;">Проект: Название проекта</li>
+                        <li class="active">@Html.ActionLink(@спринт.Название, "Sprint", new { id = @спринт.Id })</li>
+                        <li style="text-align:end;font-size:12px;">Проект: @спринт.Проект.Название</li>
                         <li style="text-align:end;font-size:12px;">Cроки: @спринт.ДатаНачала.ToShortDateString() - @спринт.ДатаКонца.ToShortDateString()</li>
                         <li><hr /></li>
                     }

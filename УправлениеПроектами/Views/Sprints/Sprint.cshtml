@@ -1,4 +1,6 @@
-﻿@model МенеджерБД.Домен.Спринт
+﻿@using МенеджерБД.Домен;
+
+@model Спринт
 
 @{
     ViewBag.Title = @Model == null ? "Ошибочка" : "Спринт: " + @Model.Название;
@@ -10,17 +12,25 @@
         <div class="span3">
             <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
                 <p>
-                    <span class="btn btn-primary btn-large">@Html.ActionLink("К списку »", "Index")</span>
+                    <span class="btn btn-large">@Html.ActionLink("К списку »", "Index")</span>
                 </p>
-                <br />
                 <p>
-                    <span class="btn btn-primary btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
+                    <span class="btn btn-large">@Html.ActionLink("Новый спринт »", "Create")</span>
                 </p>
             </div>
             <div class="well sidebar-nav">
-                <p>
-                    Список задач спринта
-                </p>
+                <h5>Список требований спринта:</h5>
+                @foreach (Требование требование in Model.Требования)
+                {
+                    <p>@Html.ActionLink(@требование.Название, "UserStory", "UserStories", new { Id = @требование.Id }, null)</p>
+                }
+            </div>
+            <div class="well sidebar-nav">
+                <h5>Список задач спринта:</h5>
+                @foreach (Задача задача in Model.Задачи)
+                {
+                    <p>@Html.ActionLink(@задача.Название, "Task", "Tasks", new { Id = @задача.Id }, null)</p>
+                }
             </div>
         </div>
 
