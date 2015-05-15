@@ -16,6 +16,8 @@ namespace МенеджерБД.Домен
         public virtual int Id { get; set; }
         public virtual string Название { get; set; }
 
+        public virtual Проект Проект { get; set; }
+
         public virtual ISet<Требование> Требования { get; protected set; }
     }
 }

@@ -3,6 +3,10 @@
   
   <class name="Требование" table="pm.User_stories" lazy="false">
     <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
+    <property name="IdПроекта" column="Project_id" />
+    <property name="IdСпринта" column="Sprint_id" />
+    <property name="IdАвтора" column="Author_id" />
+    <property name="IdКатегории" column="Category_id" />
     <property name="Название" column="Name" />
     <property name="Описание" column="Description" />
     <property name="Оценка" column="Estimate" />

@@ -12,6 +12,8 @@ namespace МенеджерБД.Домен
         public Проект()
         {
             Спринты = new HashSet<Спринт>();
+            Требования = new HashSet<Требование>();
+            Категории = new HashSet<КатегорияТребования>();
         }
 
         public virtual int Id { get; protected set; }
@@ -21,5 +23,7 @@ namespace МенеджерБД.Домен
         public virtual DateTime ДатаКонца { get; set; }
 
         public ISet<Спринт> Спринты { get; protected set; }
+        public ISet<Требование> Требования { get; protected set; }
+        public ISet<КатегорияТребования> Категории { get; protected set; }
     }
 }

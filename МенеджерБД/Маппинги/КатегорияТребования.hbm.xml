@@ -5,6 +5,8 @@
     <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
     <property name="Название" column="Name" />
 
+    <many-to-one name="Проект" column="Project_id" />
+
     <set name="Требования" lazy="false">
       <key column="Category_id" />
       <one-to-many class="Требование"/>

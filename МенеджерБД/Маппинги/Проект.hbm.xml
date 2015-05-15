@@ -16,6 +16,10 @@
       <key column="Project_id" />
       <one-to-many class="Требование"/>
     </set>
+    <set name="Категории" lazy="false">
+      <key column="Project_id" />
+      <one-to-many class="КатегорияТребования"/>
+    </set>
   </class>
   
 </hibernate-mapping>

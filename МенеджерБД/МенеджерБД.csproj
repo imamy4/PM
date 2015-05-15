@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Домен\IЗаписьБД.cs" />
-    <Compile Include="Домен\Задачи.cs" />
+    <Compile Include="Домен\Задача.cs" />
     <Compile Include="Домен\КатегорияТребования.cs" />
     <Compile Include="Домен\Требование.cs" />
     <Compile Include="Домен\Спринт.cs" />
@@ -82,7 +82,7 @@
       <SubType>Designer</SubType>
     </Content>
     <EmbeddedResource Include="Маппинги\КатегорияТребования.hbm.xml" />
-    <EmbeddedResource Include="Маппинги\Задачи.hbm.xml" />
+    <EmbeddedResource Include="Маппинги\Задача.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Требование.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Спринт.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Пользователь.hbm.xml" />
