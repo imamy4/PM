@@ -7,14 +7,21 @@
     <!--Styles.Render("~/Content/Style.css")-->
     <!--Styles.Render("~/Content/themes/base/css", "~/Content/css")-->
     <!--script src="//ui/1.10.4/jquery-ui.js"></!--script>-->
+    <!--подключение ExtJS------------------------------------------>
+    @Styles.Render("~/Content/css/ExtJS")
+    @Scripts.Render("~/bundles/ExtJS")
+    <!--основной скриптовый файл приложения------------------------>
+    @Scripts.Render("~/bundles/app")
+    <!--стили приложения------------------------------------------->
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
-    <script>
+    @*<script>
         $(function () {
             $("#datepicker").datepicker();
         });
-    </script>
+    </script>*@
 </head>
 
 <body>
@@ -24,6 +31,11 @@
              <div class="container">
                  <a class="brand">Система управления проектами</a>
                  <ul class="nav nav-pills pull-right">
+                     <li><span class="btn btn-link">@Html.ActionLink("Проекты", "Index", "Projects")</span></li>
+                     <li><span class="btn btn-link">@Html.ActionLink("Спринты", "Index", "Sprints")</span></li>
+                     <li><span class="btn btn-link">@Html.ActionLink("Требования", "Index", "UserStories")</span></li>
+                     <li><span class="btn btn-link">@Html.ActionLink("Задачи", "Index", "Tasks")</span></li>
+                     <li><span class="btn btn-link">|</span></li>
                      @Html.Action("UserLogin", "Home")
                  </ul>                                   
              </div>
@@ -41,11 +53,6 @@
     @Scripts.Render("~/bundles/common")
     @Styles.Render("~/Content/css/jquerydevui")
 
-    <!--подключение ExtJS------------------------------------------>    
-    @*@Styles.Render("~/Content/css/ExtJS")*@
-    @*@Scripts.Render("~/bundles/ExtJS")*@
-    <!--основной скриптовый файл приложения------------------------>
-    @Scripts.Render("~/bundles/app")
 
 
 

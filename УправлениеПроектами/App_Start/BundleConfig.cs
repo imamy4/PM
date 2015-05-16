@@ -18,8 +18,10 @@ namespace УправлениеПроектами
                         "~/Scripts/bootstrap*"));
 
             bundles.Add(new StyleBundle("~/Content/css")
-                    .Include("~/Content/site.css")  /* не перепутайте порядок */
-                    .Include("~/Content/bootstrap*"));
+                    .Include("~/Content/site.css"));
+                    
+            bundles.Add(new StyleBundle("~/Content/bootstrap")
+                .Include("~/Content/bootstrap*"));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                 "~/Scripts/CustomScripts/common.js"));
