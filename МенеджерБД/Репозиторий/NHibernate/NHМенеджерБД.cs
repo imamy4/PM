@@ -51,7 +51,7 @@ namespace МенеджерБД
                     session.Save(запись);
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     // логгируем ошибку
@@ -72,7 +72,7 @@ namespace МенеджерБД
                     session.Update(запись);
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     // логгируем ошибку
@@ -98,7 +98,7 @@ namespace МенеджерБД
                     session.Delete(запись);
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
                     // логгируем ошибку
