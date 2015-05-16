@@ -1,0 +1,167 @@
+﻿@model УправлениеПроектами.Models.КлассыДляФормВвода.ТребованиеДляФормы
+
+@{
+    ViewBag.Title = "Создание требования";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Создание проекта</h2>
+        @using (Html.BeginForm("Create", "UserStories", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <div class="control-group" style="height: 50px">
+                    <label class="control-label" for="IdПроекта">
+                        Выберете проект
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("IdПроекта")
+                        <div id="IdПроекта-combobox"></div>
+                        @Html.TextBox("IdПроекта", Model.IdПроекта, new { id = "IdПроекта-textbox", style = "visibility: hidden;" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Название">
+                        Введите наименование
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Название")
+                        @Html.TextBox("Название", Model.Название)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Описание">
+                        Введите описание
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Описание")
+                        @Html.TextArea("Описание", Model.Описание)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Важность">
+                        Введите важность
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Важность")
+                        @Html.TextBox("Важность", Model.Важность)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Оценка">
+                        Введите оценку
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Оценка")
+                        @Html.TextBox("Оценка", Model.Оценка)
+                    </div>
+                </div>
+                <div class="control-group" style="height: 50px">
+                    <label class="control-label" for="IdКатегории">
+                        Выберете категорию
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("IdКатегории")
+                        <div id="IdКатегории-combobox"></div>
+                        @Html.TextBox("IdКатегории", Model.IdКатегории, new { id = "IdКатегории-textbox", style = "visibility: hidden" })
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Содать новое требование
+                    </button>
+                    @Html.ActionLink("Отмена", "Index", "UserStories", null, new { @class = "btn" })
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@* Скрипт для содания combobox'ов в форме ввода *@
+
+<script>
+    Ext.onReady(function () {
+        // combobox проектов
+        var projectCombobox = Ext.create('Ext.form.field.ComboBox',
+            {
+                width: 206,
+                height: 30,
+                store: {
+                    xtype: 'jsonstore',
+                    autoLoad: true,
+                    proxy: new Ext.data.HttpProxy({
+                        url: 'GetProjects',
+                        method: 'GET'
+                    }),
+                    fields:
+                    [
+                        'Id',   //числовое значение - номер элемента
+                        'Name' //текст
+                    ]
+                },
+                listeners: {
+                    change: function (thisCombobox, newValue, oldValue) {
+                        categoryCombobox.clearValue();
+                        categoryCombobox.store.proxy.url = 'GetCategories?projectId=' + thisCombobox.getValue();
+                        categoryCombobox.store.load();
+
+                        var hiddenTextBox = Ext.get('IdПроекта-textbox');
+                        hiddenTextBox.set({ value: thisCombobox.getValue() });
+                    }
+                },
+                valueField: 'Id',
+                displayField: 'Name',
+                queryMode: 'remote'
+            });
+
+        // combobox категорий
+        var categoryCombobox = Ext.create('Ext.form.field.ComboBox',
+            {
+                width: 206,
+                height: 30,
+                store: {
+                    xtype: 'jsonstore',
+                    autoLoad: true,
+                    proxy: new Ext.data.HttpProxy({
+                        url: 'GetCategories?projectId=' + projectCombobox.getValue(),
+                        method: 'GET'
+                    }),
+                    fields:
+                    [
+                        'Id',   //числовое значение - номер элемента
+                        'Name' //текст
+                    ]
+                },
+                listeners: {
+                    change: function (thisCombobox, newValue, oldValue) {
+                        var hiddenTextBox = Ext.get('IdКатегории-textbox');
+                        hiddenTextBox.set({ value: thisCombobox.getValue() });
+                    }
+                },
+                valueField: 'Id',
+                displayField: 'Name',
+                queryMode: 'remote'
+            });
+
+
+        Ext.create('Ext.Panel', {
+            border: false,
+            bodyStyle: 'background:transparent;',
+            items: [
+                projectCombobox
+            ],
+            renderTo: 'IdПроекта-combobox'
+        });
+
+        Ext.create('Ext.Panel', {
+            border: false,
+            bodyStyle: 'background:transparent;',
+            items: [
+                categoryCombobox
+            ],
+            renderTo: 'IdКатегории-combobox'
+        });
+    });
+</script>

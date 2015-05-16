@@ -1,0 +1,36 @@
+﻿@model IEnumerable<МенеджерБД.Домен.Требование>
+
+@{
+    ViewBag.Title = "Требования";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    Поиск требования
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    <span class="btn btn-large">@Html.ActionLink("Новое требование »", "Create")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                <h2>Доступные требования</h2>
+                <ul class="nav nav-list">
+                    @foreach (var требование in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@требование.Название, "UserStory", new { id = @требование.Id })</li>
+                        <li style="text-align:end;font-size:12px;">Проект: @требование.Проект.Название</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
