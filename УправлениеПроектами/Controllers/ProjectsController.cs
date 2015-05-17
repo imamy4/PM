@@ -56,9 +56,25 @@ namespace УправлениеПроектами.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Worksheet(int id)
+        public ActionResult Desktop(int id)
         {
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
+        }
+
+        public JsonResult GetBacklog(int projectId)
+        {
+            IEnumerable<Требование> бэклог = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Требования
+                .Where(x => x.Спринт == null).OrderBy(x => x.Важность);
+        
+            return this.Json(бэклог
+                                .Select(x => new 
+                                { 
+                                    name = x.Название, 
+                                    importance = x.Важность, 
+                                    estimate = x.Оценка,
+                                    author = x.Автор.Имя
+                                }),
+                 JsonRequestBehavior.AllowGet);
         }
     }
 }

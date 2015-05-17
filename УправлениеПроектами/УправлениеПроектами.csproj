@@ -719,10 +719,10 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CustomScripts\project-desktop.js" />
     <Content Include="Scripts\CustomScripts\app.js" />
     <Content Include="Scripts\ExtJS\ext-all-debug.js" />
     <Content Include="Scripts\ExtJS\resources\css\ext-all.css" />
-    <Content Include="Scripts\CustomScripts\reservation.js" />
     <Content Include="Scripts\CustomScripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -786,6 +786,7 @@
     <Content Include="Views\Tasks\Success.cshtml" />
     <Content Include="Views\Shared\_AuthError.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Projects\Desktop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
