@@ -3,7 +3,7 @@
 
   <class name="Спринт" table="pm.Sprints" lazy="false">
     <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
-    <property name="IdПроекта" column="Project_id" />
+
     <property name="Название" column="Name" />
     <property name="ДатаНачала" column="DateStart" />
     <property name="ДатаКонца" column="DateFinish" />
