@@ -83,5 +83,10 @@ namespace УправлениеПроектами.Controllers
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
         }
 
+        public ActionResult Delete(int id)
+        {
+            МенеджерБД.УдалитьЗаписьБД<Проект>(id);
+            return RedirectToAction("Index");
+        }
     }
 }

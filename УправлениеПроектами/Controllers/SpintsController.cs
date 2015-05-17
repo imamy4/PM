@@ -50,10 +50,10 @@ namespace УправлениеПроектами.Controllers
             bool отменитьСохранение = false;
 
             // проверка на наличие проекта
-            var проект = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(спринт.IdПроекта);
+            var проект = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(спринт.IdПроект);
             if (проект == null)
             {
-                ModelState.AddModelError("IdПроекта", "Необходимо выбрать проект");
+                ModelState.AddModelError("IdПроект", "Необходимо выбрать проект");
                 отменитьСохранение = true;
             }
 
@@ -104,5 +104,10 @@ namespace УправлениеПроектами.Controllers
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id));
         }
 
+        public ActionResult Delete(int id)
+        {
+            МенеджерБД.УдалитьЗаписьБД<Спринт>(id);
+            return RedirectToAction("Index");
+        }
     }
 }
