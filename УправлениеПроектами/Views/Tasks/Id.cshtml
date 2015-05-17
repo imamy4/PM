@@ -1,0 +1,48 @@
+﻿@using МенеджерБД.Домен;
+
+@model Задача
+
+@{
+    ViewBag.Title = @Model == null ? "Ошибочка" : "Задача: " + @Model.Название;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    <span class="btn btn-large">@Html.ActionLink("Удалить »", "Delete", new { id = @Model.Id })</span>
+                </p>
+                <p>
+                    <span class="btn btn-large">@Html.ActionLink("К списку »", "Index")</span>
+                </p>
+                <p>
+                    <span class="btn btn-large">@Html.ActionLink("Новая задача »", "Create")</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                @if (Model != null)
+                {
+                    <h2>@Model.Название</h2>
+
+                    <p>
+                        @Model.Описание
+                    </p>
+                    
+                    <p>
+                        Требование: @Model.Требование.Название
+                    </p>
+
+                }
+                else
+                {
+                    <h2>Извините, по данному запросу не найдено задачи.</h2>
+                }
+            </div>
+        </div>
+    </div>
+</div>

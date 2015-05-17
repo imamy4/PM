@@ -1,0 +1,21 @@
+﻿@model МенеджерБД.Домен.Задача
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        @if (Model != null)
+        {
+            <h2>Задача успешно создано.</h2>
+            <p>
+                <span class="btn btn-large">@Html.ActionLink("К странице задачи »", "Id", new { id = @Model.Id }, null)</span>
+            </p>
+        }
+        else
+        {
+            <h2>Произошла ошибка.</h2>
+        }
+    </div>
+</div>

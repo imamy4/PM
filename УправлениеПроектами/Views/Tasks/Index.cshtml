@@ -1,0 +1,36 @@
+﻿@model IEnumerable<МенеджерБД.Домен.Задача>
+
+@{
+    ViewBag.Title = "Требования";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
+                <p>
+                    Поиск задач
+                </p>
+            </div>
+            <div class="well sidebar-nav">
+                <p>
+                    <span class="btn btn-large">@Html.ActionLink("Новая задача »", "Create")</span>
+                </p>
+            </div>
+        </div>
+        <div class="span9">
+            <div class="hero-unit" style="margin-top:45px">
+                <h2>Доступные задачи</h2>
+                <ul class="nav nav-list">
+                    @foreach (var задача in Model)
+                    {
+                        <li class="active">@Html.ActionLink(@задача.Название, "Id", new { id = @задача.Id })</li>
+                        <li style="text-align:end;font-size:12px;">Требование: @задача.Требование.Название</li>
+                        <li><hr /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

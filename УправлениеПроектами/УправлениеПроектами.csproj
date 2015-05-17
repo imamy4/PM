@@ -156,6 +156,7 @@
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserStoriesController.cs" />
     <Compile Include="Controllers\SpintsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Models\КлассыДляФормВвода\ДанныеВходаВСистему.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПользовательРегистрации.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПроектДляФормы.cs" />
+    <Compile Include="Models\КлассыДляФормВвода\ЗадачаДляФормы.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ТребованиеДляФормы.cs" />
     <Compile Include="Models\КлассыДляФормВвода\СпринтДляФормы.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -778,6 +780,10 @@
     <Content Include="Views\UserStories\Id.cshtml" />
     <Content Include="Views\UserStories\Success.cshtml" />
     <Content Include="Views\UserStories\Create.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Id.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

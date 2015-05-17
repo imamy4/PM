@@ -1,0 +1,97 @@
+﻿@model УправлениеПроектами.Models.КлассыДляФормВвода.ЗадачаДляФормы
+
+@{
+    ViewBag.Title = "Создание задачи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" hero-unit" style="margin-top:45px">
+        <h2>Создание задачи</h2>
+        @using (Html.BeginForm("Create", "Tasks", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <fieldset>
+                <div class="control-group" style="height: 50px">
+                    <label class="control-label" for="IdПроект">
+                        Выберете требование
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("IdТребование")
+                        <div id="IdТребование-combobox"></div>
+                        @Html.TextBox("IdТребование", Model.IdТребование, new { id = "IdТребование-textbox", style = "visibility: hidden;" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Название">
+                        Введите наименование
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Название")
+                        @Html.TextBox("Название", Model.Название)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Описание">
+                        Введите описание
+                    </label>
+                    <div class="controls">
+                        @Html.ValidationMessage("Описание")
+                        @Html.TextArea("Описание", Model.Описание)
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Содать новое требование
+                    </button>
+                    @Html.ActionLink("Отмена", "Index", "Tasks", null, new { @class = "btn" })
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>
+
+@* Скрипт для содания combobox'ов в форме ввода *@
+
+<script>
+    Ext.onReady(function () {
+        // combobox проектов
+        var userStoryCombobox = Ext.create('Ext.form.field.ComboBox',
+            {
+                width: 206,
+                height: 30,
+                store: {
+                    xtype: 'jsonstore',
+                    autoLoad: true,
+                    proxy: new Ext.data.HttpProxy({
+                        url: 'GetUserStories',
+                        method: 'GET'
+                    }),
+                    fields:
+                    [
+                        'Id',   //числовое значение - номер элемента
+                        'Name' //текст
+                    ]
+                },
+                listeners: {
+                    change: function (thisCombobox, newValue, oldValue) {
+                        var hiddenTextBox = Ext.get('IdТребование-textbox');
+                        hiddenTextBox.set({ value: thisCombobox.getValue() });
+                    }
+                },
+                valueField: 'Id',
+                displayField: 'Name',
+                queryMode: 'remote',
+                typeAhead: true,
+                typeAheadDelay: 10
+            });
+
+        Ext.create('Ext.Panel', {
+            border: false,
+            bodyStyle: 'background:transparent;',
+            items: [
+                userStoryCombobox
+            ],
+            renderTo: 'IdТребование-combobox'
+        });
+    });
+</script>
