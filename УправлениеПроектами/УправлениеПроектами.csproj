@@ -152,7 +152,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Base\BaseEntityController.cs" />
+    <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserStoriesController.cs" />
@@ -766,15 +767,15 @@
     </Content>
     <Content Include="Views\Shared\_Ok.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
-    <Content Include="Views\Projects\Project.cshtml" />
+    <Content Include="Views\Projects\Id.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Success.cshtml" />
     <Content Include="Views\Sprints\Index.cshtml" />
-    <Content Include="Views\Sprints\Sprint.cshtml" />
+    <Content Include="Views\Sprints\Id.cshtml" />
     <Content Include="Views\Sprints\Create.cshtml" />
     <Content Include="Views\Sprints\Success.cshtml" />
     <Content Include="Views\UserStories\Index.cshtml" />
-    <Content Include="Views\UserStories\UserStory.cshtml" />
+    <Content Include="Views\UserStories\Id.cshtml" />
     <Content Include="Views\UserStories\Success.cshtml" />
     <Content Include="Views\UserStories\Create.cshtml" />
   </ItemGroup>

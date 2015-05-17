@@ -25,7 +25,7 @@
                 <ul class="nav nav-list">
                     @foreach (var спринт in Model)
                     {
-                        <li class="active">@Html.ActionLink(@спринт.Название, "Sprint", new { id = @спринт.Id })</li>
+                        <li class="active">@Html.ActionLink(@спринт.Название, "Id", new { id = @спринт.Id })</li>
                         <li style="text-align:end;font-size:12px;">Проект: @спринт.Проект.Название</li>
                         <li style="text-align:end;font-size:12px;">Cроки: @спринт.ДатаНачала.ToShortDateString() - @спринт.ДатаКонца.ToShortDateString()</li>
                         <li><hr /></li>

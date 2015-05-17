@@ -8,45 +8,24 @@ using УправлениеПроектами.Models.КлассыДляФормВ
 
 namespace УправлениеПроектами.Controllers
 {
-    public class SprintsController : BaseController
+    public class SprintsController : BaseEntityController<Спринт>
     {
-        /// <summary>
-        /// Выводит актуальные спринты
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
+        #region Реализация BaseEntityController
+
+        protected override IEnumerable<Спринт> ПолучитьСущности()
         {
-            return View(МенеджерБД.АктуальныеСпринты());
+            return МенеджерБД.АктуальныеСпринты();
         }
 
-        /// <summary>
-        /// Основная страница конкретного спринта
-        /// </summary>
-        /// <param name="id">Id проекта</param>
-        /// <returns></returns>
-        public ActionResult Sprint(int id)
+        protected override БазоваяМодельСущностиБД<Спринт> ПолучитьЭкземплярМодели()
         {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id));
+            return new СпринтДляФормы();
         }
 
-        /// <summary>
-        /// Страница создания нового спринта
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Create()
+        protected override bool ПроверитьМодельНаВалидность(БазоваяМодельСущностиБД<Спринт> модельСущности)
         {
-            СпринтДляФормы новыйСпринт = new СпринтДляФормы();
-            return View(новыйСпринт);
-        }
+            СпринтДляФормы спринт = модельСущности as СпринтДляФормы;
 
-        /// <summary>
-        /// Страница создания нового спринта, с проверкой на валидность введенных значений
-        /// </summary>
-        /// <param name="спринт"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Create(СпринтДляФормы спринт)
-        {
             bool отменитьСохранение = false;
 
             // проверка на наличие проекта
@@ -82,32 +61,9 @@ namespace УправлениеПроектами.Controllers
                 отменитьСохранение = true;
             }
 
-            if (!отменитьСохранение)
-            {
-                Спринт новыйСпринт = спринт.ПеревестиВСущностьБД();
-
-                МенеджерБД.СоздатьЗаписьБД<Спринт>(новыйСпринт);
-
-                return RedirectToAction("Success", new { id = новыйСпринт.Id });
-            }
-
-            return View(спринт);
+            return !отменитьСохранение;
         }
 
-        /// <summary>
-        /// Страница с уведомлением об удачном создании спринта
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult Success(int id)
-        {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            МенеджерБД.УдалитьЗаписьБД<Спринт>(id);
-            return RedirectToAction("Index");
-        }
+        #endregion
     }
 }

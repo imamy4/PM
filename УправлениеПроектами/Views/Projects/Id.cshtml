@@ -22,7 +22,7 @@
                 <h5>Список спринтов:</h5>
                 @foreach (Спринт спринт in Model.Спринты)
                 {
-                    <p>@Html.ActionLink(@спринт.Название, "Sprint", "Sprints", new { Id = @спринт.Id}, null)</p>
+                    <p>@Html.ActionLink(@спринт.Название, "Id", "Sprints", new { Id = @спринт.Id}, null)</p>
                 }
             </div>
             <div class="well sidebar-nav">

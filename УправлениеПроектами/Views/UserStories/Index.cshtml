@@ -25,7 +25,7 @@
                 <ul class="nav nav-list">
                     @foreach (var требование in Model)
                     {
-                        <li class="active">@Html.ActionLink(@требование.Название, "UserStory", new { id = @требование.Id })</li>
+                        <li class="active">@Html.ActionLink(@требование.Название, "Id", new { id = @требование.Id })</li>
                         <li style="text-align:end;font-size:12px;">Проект: @требование.Проект.Название</li>
                         <li><hr /></li>
                     }

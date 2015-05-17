@@ -9,45 +9,24 @@ using УправлениеПроектами.Models.КлассыДляФормВ
 
 namespace УправлениеПроектами.Controllers
 {
-    public class UserStoriesController : BaseController
+    public class UserStoriesController : BaseEntityController<Требование>
     {
-        /// <summary>
-        /// Выводит все требования
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
+        #region Реализация BaseEntityController
+
+        protected override IEnumerable<Требование> ПолучитьСущности()
         {
-            return View(МенеджерБД.Записи<Требование>());
+            return МенеджерБД.АктуальныеТребования();
         }
 
-        /// <summary>
-        /// Основная страница конкретного требования
-        /// </summary>
-        /// <param name="id">Id требования</param>
-        /// <returns></returns>
-        public ActionResult UserStory(int id)
+        protected override БазоваяМодельСущностиБД<Требование> ПолучитьЭкземплярМодели()
         {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(id));
+            return new ТребованиеДляФормы() { IdАвтор = ТекущийПользователь.Id };
         }
 
-        /// <summary>
-        /// Страница создания нового требование
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Create()
+        protected override bool ПроверитьМодельНаВалидность(БазоваяМодельСущностиБД<Требование> модельСущности)
         {
-            ТребованиеДляФормы новоеТребование = new ТребованиеДляФормы();
-            return View(новоеТребование);
-        }
+            ТребованиеДляФормы требование = модельСущности as ТребованиеДляФормы;
 
-        /// <summary>
-        /// Страница создания нового требования, с проверкой на валидность введенных значений
-        /// </summary>
-        /// <param name="требование"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Create(ТребованиеДляФормы требование)
-        {
             bool отменитьСохранение = false;
 
             // проверка на наличие проекта
@@ -88,35 +67,15 @@ namespace УправлениеПроектами.Controllers
                 отменитьСохранение = true;
             }
 
-            if (!отменитьСохранение)
-            {
-                требование.IdАвтор = ТекущийПользователь.Id;
-                Требование новоеТребование = требование.ПеревестиВСущностьБД();
-                
-                МенеджерБД.СоздатьЗаписьБД<Требование>(новоеТребование);
-
-                return RedirectToAction("Success", new { id = новоеТребование.Id });
-            }
-
-            return View(требование);
+            return !отменитьСохранение;
         }
+
+        #endregion
 
         /// <summary>
-        /// Страница с уведомлением об удачном создании требования
+        /// Список требований для UI создания сущности
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Success(int id)
-        {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            МенеджерБД.УдалитьЗаписьБД<Требование>(id);
-            return RedirectToAction("Index");
-        }
-
         public JsonResult GetProjects()
         {
             IEnumerable<Проект> проекты = МенеджерБД.АктуальныеПроекты();
@@ -124,6 +83,11 @@ namespace УправлениеПроектами.Controllers
             return this.Json(проекты.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Список категоий для UI содания сущности
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         public JsonResult GetCategories(int? projectId)
         {
             IEnumerable<КатегорияТребования> категории = МенеджерБД.Записи<КатегорияТребования>(x => projectId.HasValue && x.Проект.Id == projectId.Value);

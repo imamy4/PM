@@ -22,7 +22,7 @@
                 <h5>Список требований спринта:</h5>
                 @foreach (Требование требование in Model.Требования)
                 {
-                    <p>@Html.ActionLink(@требование.Название, "UserStory", "UserStories", new { Id = @требование.Id }, null)</p>
+                    <p>@Html.ActionLink(@требование.Название, "Id", "UserStories", new { Id = @требование.Id }, null)</p>
                 }
             </div>
             <div class="well sidebar-nav">

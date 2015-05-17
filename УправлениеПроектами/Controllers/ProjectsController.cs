@@ -8,45 +8,24 @@ using УправлениеПроектами.Models.КлассыДляФормВ
 
 namespace УправлениеПроектами.Controllers
 {
-    public class ProjectsController : BaseController
+    public class ProjectsController : BaseEntityController<Проект>
     {
-        /// <summary>
-        /// Выводит актуальные проекты.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
+        #region Реализация BaseEntityController
+
+        protected override IEnumerable<Проект> ПолучитьСущности()
         {
-            return View(МенеджерБД.АктуальныеПроекты());
+            return МенеджерБД.АктуальныеПроекты();
         }
 
-        /// <summary>
-        /// Основная страница конкретного проекта
-        /// </summary>
-        /// <param name="id">Id проекта</param>
-        /// <returns></returns>
-        public ActionResult Project(int id)
+        protected override БазоваяМодельСущностиБД<Проект> ПолучитьЭкземплярМодели()
         {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
+            return new ПроектДляФормы();
         }
 
-        /// <summary>
-        /// Страница создания нового проекта
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Create()
+        protected override bool ПроверитьМодельНаВалидность(БазоваяМодельСущностиБД<Проект> модельСущности)
         {
-            ПроектДляФормы новыйПроект = new ПроектДляФормы();
-            return View(новыйПроект);
-        }
+            ПроектДляФормы проект = модельСущности as ПроектДляФормы;
 
-        /// <summary>
-        /// Страница создания нового проекта, с проверкой на валидность введенных значений
-        /// </summary>
-        /// <param name="проект"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult Create(ПроектДляФормы проект)
-        {
             bool отменитьСохранение = false;
 
             if (string.IsNullOrWhiteSpace(проект.Название))
@@ -61,32 +40,9 @@ namespace УправлениеПроектами.Controllers
                 отменитьСохранение = true;
             }
 
-            if (!отменитьСохранение)
-            {
-                Проект новыйПроект = проект.ПеревестиВСущностьБД();
-
-                МенеджерБД.СоздатьЗаписьБД<Проект>(новыйПроект);
-
-                return RedirectToAction("Success", new { id = новыйПроект.Id });
-            }
-
-            return View(проект);
+            return !отменитьСохранение;
         }
 
-        /// <summary>
-        /// Страница с уведомлением об удачном создании проекта
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult Success(int id)
-        {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            МенеджерБД.УдалитьЗаписьБД<Проект>(id);
-            return RedirectToAction("Index");
-        }
+        #endregion
     }
 }
