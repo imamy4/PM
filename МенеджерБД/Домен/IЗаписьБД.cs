@@ -11,5 +11,6 @@ namespace МенеджерБД.Домен
     /// </summary>
     public interface IЗаписьБД
     {
+        int Id { get; set; }
     }
 }

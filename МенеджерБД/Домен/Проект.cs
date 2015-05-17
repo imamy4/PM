@@ -16,7 +16,7 @@ namespace МенеджерБД.Домен
             Категории = new HashSet<КатегорияТребования>();
         }
 
-        public virtual int Id { get; protected set; }
+        public virtual int Id { get; set; }
         public virtual string Название { get; set; }
         public virtual string Описание { get; set; }
         public virtual DateTime ДатаНачала { get; set; }
