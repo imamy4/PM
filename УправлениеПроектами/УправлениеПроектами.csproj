@@ -784,6 +784,8 @@
     <Content Include="Views\Tasks\Id.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\Success.cshtml" />
+    <Content Include="Views\Shared\_AuthError.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

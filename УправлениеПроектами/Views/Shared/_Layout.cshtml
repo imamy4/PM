@@ -4,9 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <!--Styles.Render("~/Content/Style.css")-->
-    <!--Styles.Render("~/Content/themes/base/css", "~/Content/css")-->
-    <!--script src="//ui/1.10.4/jquery-ui.js"></!--script>-->
     <!--подключение ExtJS------------------------------------------>
     @Styles.Render("~/Content/css/ExtJS")
     @Scripts.Render("~/bundles/ExtJS")
@@ -17,11 +14,6 @@
     @Styles.Render("~/Content/bootstrap")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
-    @*<script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script>*@
 </head>
 
 <body>
@@ -31,10 +23,7 @@
              <div class="container">
                  <a class="brand">Система управления проектами</a>
                  <ul class="nav nav-pills pull-right">
-                     <li><span class="btn btn-link">@Html.ActionLink("Проекты", "Index", "Projects")</span></li>
-                     <li><span class="btn btn-link">@Html.ActionLink("Спринты", "Index", "Sprints")</span></li>
-                     <li><span class="btn btn-link">@Html.ActionLink("Требования", "Index", "UserStories")</span></li>
-                     <li><span class="btn btn-link">@Html.ActionLink("Задачи", "Index", "Tasks")</span></li>
+                     @Html.Action("Menu", "Home")
                      <li><span class="btn btn-link">|</span></li>
                      @Html.Action("UserLogin", "Home")
                  </ul>                                   

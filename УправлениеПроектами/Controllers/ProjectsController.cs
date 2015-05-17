@@ -50,5 +50,15 @@ namespace УправлениеПроектами.Controllers
         }
 
         #endregion
+
+        /// <summary>
+        /// Рабочая страница проекта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Worksheet(int id)
+        {
+            return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
+        }
     }
 }

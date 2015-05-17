@@ -23,7 +23,9 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public virtual ActionResult Index()
         {
-            return View(ПолучитьСущности());
+            return ТекущийПользователь != null 
+                        ? View(ПолучитьСущности())
+                        : View("_AuthError");
         }
 
         /// <summary>
@@ -33,7 +35,9 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public virtual ActionResult Id(int id)
         {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<T>(id));
+            return ТекущийПользователь != null
+                        ? View(МенеджерБД.ПолучитьЗаписьБДПоId<T>(id))
+                        : View("_AuthError");
         }
             
         /// <summary>
@@ -42,7 +46,9 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public virtual ActionResult Create()
         {
-            return View(ПолучитьЭкземплярМодели());
+            return ТекущийПользователь != null
+                        ? View(ПолучитьЭкземплярМодели())
+                        : View("_AuthError");
         }
 
         /// <summary>
@@ -53,6 +59,11 @@ namespace УправлениеПроектами.Controllers
         [NonAction]
         public virtual ActionResult Create(БазоваяМодельСущностиБД<T> модельСущности)
         {
+            if (ТекущийПользователь == null)
+            {
+                return View("_AuthError");
+            }
+
             if (ПроверитьМодельНаВалидность(модельСущности))
             {
                 T новаяСущность = модельСущности.ПеревестиВСущностьБД();
@@ -72,7 +83,9 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public virtual ActionResult Success(int id)
         {
-            return View(МенеджерБД.ПолучитьЗаписьБДПоId<T>(id));
+            return ТекущийПользователь != null
+                        ? View(МенеджерБД.ПолучитьЗаписьБДПоId<T>(id))
+                        : View("_AuthError");
         }
 
         /// <summary>
@@ -82,6 +95,11 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public ActionResult Delete(int id)
         {
+            if (ТекущийПользователь == null)
+            {
+                return View("_AuthError");
+            }
+
             МенеджерБД.УдалитьЗаписьБД<T>(id);
             return RedirectToAction("Index");
         }

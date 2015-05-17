@@ -13,15 +13,17 @@ namespace УправлениеПроектами.Controllers
 {
     public class HomeController : BaseController
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index()
         {
             return View(ТекущийПользователь);
         }
 
         public ActionResult UserLogin()
+        {
+            return View(ТекущийПользователь);
+        }
+
+        public ActionResult Menu()
         {
             return View(ТекущийПользователь);
         }
