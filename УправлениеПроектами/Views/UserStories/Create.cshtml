@@ -12,13 +12,13 @@
         {
             <fieldset>
                 <div class="control-group" style="height: 50px">
-                    <label class="control-label" for="IdПроекта">
+                    <label class="control-label" for="IdПроект">
                         Выберете проект
                     </label>
                     <div class="controls">
-                        @Html.ValidationMessage("IdПроекта")
-                        <div id="IdПроекта-combobox"></div>
-                        @Html.TextBox("IdПроекта", Model.IdПроекта, new { id = "IdПроекта-textbox", style = "visibility: hidden;" })
+                        @Html.ValidationMessage("IdПроект")
+                        <div id="IdПроект-combobox"></div>
+                        @Html.TextBox("IdПроект", Model.IdПроект, new { id = "IdПроект-textbox", style = "visibility: hidden;" })
                     </div>
                 </div>
                 <div class="control-group">
@@ -58,13 +58,13 @@
                     </div>
                 </div>
                 <div class="control-group" style="height: 50px">
-                    <label class="control-label" for="IdКатегории">
+                    <label class="control-label" for="IdКатегория">
                         Выберете категорию
                     </label>
                     <div class="controls">
-                        @Html.ValidationMessage("IdКатегории")
-                        <div id="IdКатегории-combobox"></div>
-                        @Html.TextBox("IdКатегории", Model.IdКатегории, new { id = "IdКатегории-textbox", style = "visibility: hidden" })
+                        @Html.ValidationMessage("IdКатегория")
+                        <div id="IdКатегория-combobox"></div>
+                        @Html.TextBox("IdКатегория", Model.IdКатегория, new { id = "IdКатегория-textbox", style = "visibility: hidden" })
                     </div>
                 </div>
 
@@ -107,13 +107,15 @@
                         categoryCombobox.store.proxy.url = 'GetCategories?projectId=' + thisCombobox.getValue();
                         categoryCombobox.store.load();
 
-                        var hiddenTextBox = Ext.get('IdПроекта-textbox');
+                        var hiddenTextBox = Ext.get('IdПроект-textbox');
                         hiddenTextBox.set({ value: thisCombobox.getValue() });
                     }
                 },
                 valueField: 'Id',
                 displayField: 'Name',
-                queryMode: 'remote'
+                queryMode: 'remote',
+                typeAhead: true,
+                typeAheadDelay: 10
             });
 
         // combobox категорий
@@ -136,13 +138,15 @@
                 },
                 listeners: {
                     change: function (thisCombobox, newValue, oldValue) {
-                        var hiddenTextBox = Ext.get('IdКатегории-textbox');
+                        var hiddenTextBox = Ext.get('IdКатегория-textbox');
                         hiddenTextBox.set({ value: thisCombobox.getValue() });
                     }
                 },
                 valueField: 'Id',
                 displayField: 'Name',
-                queryMode: 'remote'
+                queryMode: 'remote',
+                typeAhead: true,
+                typeAheadDelay: 100
             });
 
 
@@ -152,7 +156,7 @@
             items: [
                 projectCombobox
             ],
-            renderTo: 'IdПроекта-combobox'
+            renderTo: 'IdПроект-combobox'
         });
 
         Ext.create('Ext.Panel', {
@@ -161,7 +165,7 @@
             items: [
                 categoryCombobox
             ],
-            renderTo: 'IdКатегории-combobox'
+            renderTo: 'IdКатегория-combobox'
         });
     });
 </script>

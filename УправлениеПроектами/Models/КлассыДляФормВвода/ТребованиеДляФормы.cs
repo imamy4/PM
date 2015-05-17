@@ -9,11 +9,11 @@ namespace УправлениеПроектами.Models.КлассыДляФор
 {
     public class ТребованиеДляФормы : БазоваяМодельСущностиБД<Требование>
     {
-        public int IdПроекта { get; set; }
+        public int IdПроект { get; set; }
 
-        public int IdАвтора { get; set; }
-
-        public int IdКатегории { get; set; }
+        public int IdКатегория { get; set; }
+      
+        public int IdАвтор { get; set; }
 
         public string Название { get; set; }
 
@@ -23,40 +23,15 @@ namespace УправлениеПроектами.Models.КлассыДляФор
 
         public int Важность { get; set; }
 
-        public IEnumerable<SelectListItem> ПроектыSelectList
+        public override Требование ПеревестиВСущностьБД()
         {
-            get
-            {
-                foreach (Проект проект in МенеджерБД.АктуальныеПроекты())
-                {
-                    yield return new SelectListItem
-                    {
-                        Value = проект.Id.ToString(),
-                        Text = проект.Название.ToString(),
-                        Selected = false
-                    };
-                }
-            }
+            Требование требование = base.ПеревестиВСущностьБД();
+            требование.Проект = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(IdПроект);
+            требование.Категория = МенеджерБД.ПолучитьЗаписьБДПоId<КатегорияТребования>(IdКатегория);
+            требование.Автор = МенеджерБД.ПолучитьЗаписьБДПоId<Пользователь>(IdАвтор);
+
+            return требование;
         }
 
-        public IEnumerable<SelectListItem> КатегорииSelectList
-        {
-            get
-            {
-                Проект выбранныйПроект = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(IdПроекта);
-                if (выбранныйПроект != null)
-                {
-                    foreach (КатегорияТребования категория in выбранныйПроект.Категории)
-                    {
-                        yield return new SelectListItem
-                        {
-                            Value = категория.Id.ToString(),
-                            Text = категория.Название.ToString(),
-                            Selected = false
-                        };
-                    }
-                }
-            }
-        }
     }
 }

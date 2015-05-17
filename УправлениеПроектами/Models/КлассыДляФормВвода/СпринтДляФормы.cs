@@ -9,7 +9,7 @@ namespace УправлениеПроектами.Models.КлассыДляФор
 {
     public class СпринтДляФормы : БазоваяМодельСущностиБД<Спринт>
     {
-        public int IdПроекта { get; set; }
+        public int IdПроект { get; set; }
 
         public IEnumerable<SelectListItem> ПроектыSelectList
         {
@@ -151,6 +151,14 @@ namespace УправлениеПроектами.Models.КлассыДляФор
                     };
                 }
             }
+        }
+
+        public override Спринт ПеревестиВСущностьБД()
+        {
+            Спринт спринт = base.ПеревестиВСущностьБД();
+            спринт.Проект = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(IdПроект);
+
+            return спринт;
         }
     }
 }

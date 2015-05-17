@@ -12,6 +12,9 @@
         <div class="span3">
             <div class="well sidebar-nav" style="margin-top: 45px; text-align:start">
                 <p>
+                    <span class="btn btn-large">@Html.ActionLink("Удалить »", "Delete", new { id = @Model.Id })</span>
+                </p>
+                <p>
                     <span class="btn btn-large">@Html.ActionLink("К списку »", "Index")</span>
                 </p>
                 <p>
