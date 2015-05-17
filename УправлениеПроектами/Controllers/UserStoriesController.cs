@@ -13,6 +13,12 @@ namespace УправлениеПроектами.Controllers
     {
         #region Реализация BaseEntityController
 
+        [HttpPost]
+        public ActionResult Create(ТребованиеДляФормы модельЗадачи)
+        {
+            return Create((БазоваяМодельСущностиБД<Требование>)модельЗадачи);
+        }
+
         protected override IEnumerable<Требование> ПолучитьСущности()
         {
             return МенеджерБД.АктуальныеТребования();
@@ -58,12 +64,6 @@ namespace УправлениеПроектами.Controllers
             if (требование.Оценка < 0)
             {
                 ModelState.AddModelError("Оценка", "Оценка не может быть отрицательным числом");
-                отменитьСохранение = true;
-            }
-
-            if (string.IsNullOrWhiteSpace(требование.Описание))
-            {
-                ModelState.AddModelError("Описание", "Необходимо заполнить Описание");
                 отменитьСохранение = true;
             }
 

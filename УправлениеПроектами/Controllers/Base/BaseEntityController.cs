@@ -50,7 +50,7 @@ namespace УправлениеПроектами.Controllers
         /// </summary>
         /// <param name="модельСущности"></param>
         /// <returns></returns>
-        [HttpPost]
+        [NonAction]
         public virtual ActionResult Create(БазоваяМодельСущностиБД<T> модельСущности)
         {
             if (ПроверитьМодельНаВалидность(модельСущности))

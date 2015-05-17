@@ -11,7 +11,13 @@ namespace УправлениеПроектами.Controllers
     public class ProjectsController : BaseEntityController<Проект>
     {
         #region Реализация BaseEntityController
-
+      
+        [HttpPost]
+        public ActionResult Create(ПроектДляФормы модельЗадачи)
+        {
+            return Create((БазоваяМодельСущностиБД<Проект>)модельЗадачи);
+        }
+        
         protected override IEnumerable<Проект> ПолучитьСущности()
         {
             return МенеджерБД.АктуальныеПроекты();

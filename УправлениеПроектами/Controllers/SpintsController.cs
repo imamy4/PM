@@ -11,6 +11,12 @@ namespace УправлениеПроектами.Controllers
     public class SprintsController : BaseEntityController<Спринт>
     {
         #region Реализация BaseEntityController
+        
+        [HttpPost]
+        public ActionResult Create(СпринтДляФормы модельЗадачи)
+        {
+            return Create((БазоваяМодельСущностиБД<Спринт>)модельЗадачи);
+        }
 
         protected override IEnumerable<Спринт> ПолучитьСущности()
         {
