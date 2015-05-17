@@ -6,9 +6,16 @@
 
 <div class="container">
     <div class=" hero-unit" style="margin-top:45px">
-        <h2>Проект успешно создан.</h2>
-                <p>
-            <span class="btn btn-primary btn-large">@Html.ActionLink("К странице проекта »", "Project", "Projects", new { id = @Model.Id }, null)</span>
-        </p>
+        @if (Model != null)
+        {
+            <h2>Проект успешно создан.</h2>
+            <p>
+                <span class="btn btn-large">@Html.ActionLink("К странице проекта »", "Project", "Projects", new { id = @Model.Id }, null)</span>
+            </p>
+        }
+        else
+        {
+            <h2>Произошла ошибка.</h2>
+        }
     </div>
 </div>

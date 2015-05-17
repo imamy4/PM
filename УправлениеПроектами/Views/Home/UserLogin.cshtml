@@ -2,7 +2,6 @@
 
 @if (Model != null)
 {
-    <li><span class="btn btn-link">@Html.ActionLink("Домой","Index","Home")</span></li>
     <li><span class="btn btn-link">@Model.Email</span></li>
     <li><span class="btn btn-link">@Html.ActionLink("Выход", "Logout", "Login")</span></li>
 }
