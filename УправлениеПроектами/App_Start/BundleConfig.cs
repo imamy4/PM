@@ -29,15 +29,16 @@ namespace УправлениеПроектами
             bundles.Add(new ScriptBundle("~/bundles/reservation").Include(
                 "~/Scripts/CustomScripts/reservation.js"));
 
-            // основной скриптовый файл приложения
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/Scripts/CustomScripts/app.js"));
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                .Include("~/Scripts/CustomScripts/app.js"));  // основной скриптовый файл приложения
+
             // ExtJS
             bundles.Add(new ScriptBundle("~/bundles/ExtJS").Include(
-              "~/Scripts/ExtJS/ext-all-debug.js"));
+              "~/Scripts/ExtJS/ext-all-debug.js")                    
+                  .Include("~/Scripts/ExtJS/locale/ext-lang-ru.js"));
+    
             bundles.Add(new StyleBundle("~/Content/css/ExtJS").Include(
              "~/Scripts/ExtJS/resources/css/ext-all.css"));
-
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-1.*"));

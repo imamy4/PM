@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using МенеджерБД.Домен;
+using УправлениеПроектами.Helpers;
 using УправлениеПроектами.Models.КлассыДляФормВвода;
 
 namespace УправлениеПроектами.Controllers
@@ -70,6 +71,65 @@ namespace УправлениеПроектами.Controllers
             return !отменитьСохранение;
         }
 
+        protected override Требование ПолучитьСущностьДляСоздания()
+        {
+            Требование требование = new Требование();
+            требование.Автор = ТекущийПользователь;
+
+            требование.Название = Request["name"];
+            требование.Описание = Request["description"];
+
+            требование.Важность = Конвертер.ВЧисло32(Request["importance"]);
+            требование.Оценка = Конвертер.ВЧисло32(Request["estimate"]);
+
+            требование.Проект = new Проект { Id = Конвертер.ВЧисло32(Request["projectId"]) };
+            int idКатегории = Конвертер.ВЧисло32(Request["categoryId"]);
+            if (idКатегории != 0)
+            {
+                требование.Категория = new КатегорияТребования { Id = idКатегории };
+            }
+
+            return требование;
+        }
+
+        protected override Требование ПолучитьСущностьДляОбновления()
+        {
+            int id = Конвертер.ВЧисло32(Request["id"]);
+            Требование требование = МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(id);
+
+            if (требование != null)
+            {
+                if (Request["name"] != null)
+                {
+                    требование.Название = Request["name"];
+                }
+                if (Request["description"] != null)
+                {
+                    требование.Описание = Request["description"];
+                }
+                if (Request["importance"] != null)
+                {
+                    требование.Важность = Конвертер.ВЧисло32(Request["importance"]);
+                }
+                if (Request["estimate"] != null)
+                {
+                    требование.Оценка = Конвертер.ВЧисло32(Request["estimate"]);
+                }
+                if (Request["categoryId"] != null)
+                {
+                    int idКатегории = Конвертер.ВЧисло32(Request["categoryId"], -1);
+                    if (idКатегории != -1)
+                    {
+                        требование.Категория = idКатегории != 0
+                            ? new КатегорияТребования { Id = idКатегории }
+                            : null;
+                    }
+                }
+            }
+
+            return требование;
+        }
+
         #endregion
 
         /// <summary>
@@ -88,9 +148,14 @@ namespace УправлениеПроектами.Controllers
         /// </summary>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        public JsonResult GetCategories(int? projectId)
+        public JsonResult GetCategories(int? projectId, bool includeEmpty = false)
         {
             IEnumerable<КатегорияТребования> категории = МенеджерБД.Записи<КатегорияТребования>(x => projectId.HasValue && x.Проект.Id == projectId.Value);
+            if (includeEmpty)
+            {
+                категории = new List<КатегорияТребования>(категории);
+                ((List<КатегорияТребования>)категории).Add(new КатегорияТребования() { Id = 0, Название = "-" });
+            }
 
             return this.Json(категории.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
         }

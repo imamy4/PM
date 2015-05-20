@@ -104,6 +104,50 @@ namespace УправлениеПроектами.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Создание новой сущности, возвращает JSON результат с полем success
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CreateExt()
+        {
+            if (ТекущийПользователь == null)
+            {
+                return View("_AuthError");
+            }
+
+            bool удачноеСохранение = false;
+            
+            T сущность = ПолучитьСущностьДляСоздания();
+            if(сущность != null)
+            {
+                удачноеСохранение = МенеджерБД.СоздатьЗаписьБД<T>(сущность);
+            }
+
+            return this.Json(new { success = удачноеСохранение }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Обновление сущности, возвращает JSON результат с полем success
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateExt()
+        {
+            if (ТекущийПользователь == null)
+            {
+                return View("_AuthError");
+            }
+
+            bool удачноеОбновление = false;
+
+            T сущность = ПолучитьСущностьДляОбновления();
+            if (сущность != null)
+            {
+               удачноеОбновление = МенеджерБД.ОбновитьЗаписьБД<T>(сущность);
+            }
+
+            return this.Json(new { success = удачноеОбновление }, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         /// <summary>
@@ -125,5 +169,23 @@ namespace УправлениеПроектами.Controllers
         /// <param name="модельСущности"></param>
         /// <returns>True если модель валидна</returns>
         protected abstract bool ПроверитьМодельНаВалидность(БазоваяМодельСущностиБД<T> модельСущности);
+
+        /// <summary>
+        /// Создает сущность на основе Request
+        /// </summary>
+        /// <returns></returns>
+        protected virtual T ПолучитьСущностьДляСоздания()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Получает сущность на основе Request и заполняет поля, пришежшие в Request
+        /// </summary>
+        /// <returns></returns>
+        protected virtual T ПолучитьСущностьДляОбновления()
+        {
+            return null;
+        }
     }
 }

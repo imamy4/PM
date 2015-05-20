@@ -127,12 +127,12 @@
     min-height: 1px;
     margin-left: 30px;
   }
-  .container,
+  /*.container,
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
     width: 1170px;
-  }
+  }*/
   .span12 {
     width: 1170px;
   }
@@ -477,12 +477,12 @@
     min-height: 1px;
     margin-left: 20px;
   }
-  .container,
+  /*.container,
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
     width: 724px;
-  }
+  }*/
   .span12 {
     width: 724px;
   }
@@ -959,9 +959,6 @@
   }
   .navbar-fixed-top {
     margin-bottom: 20px;
-  }
-  .navbar-fixed-bottom {
-    margin-top: 20px;
   }
   .navbar-fixed-top .navbar-inner,
   .navbar-fixed-bottom .navbar-inner {

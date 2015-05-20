@@ -64,15 +64,70 @@ namespace УправлениеПроектами.Controllers
         public JsonResult GetBacklog(int projectId)
         {
             IEnumerable<Требование> бэклог = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Требования
-                .Where(x => x.Спринт == null).OrderBy(x => x.Важность);
+                .Where(x => x.Спринт == null).OrderBy(x => -x.Важность);
         
             return this.Json(бэклог
                                 .Select(x => new 
                                 { 
+                                    id = x.Id,
                                     name = x.Название, 
                                     importance = x.Важность, 
                                     estimate = x.Оценка,
-                                    author = x.Автор.Имя
+                                    author_name = x.Автор.Имя,
+                                    author_surname = x.Автор.Фамилия,
+                                    categoryId = x.Категория == null ? 0 : x.Категория.Id,
+                                    categoryName = x.Категория == null ? "" : x.Категория.Название
+                                }),
+                 JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCurrentSprints(int projectId)
+        {
+            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                .Where(спринт => спринт.ДатаНачала <= DateTime.Now && спринт.ДатаКонца >= DateTime.Now)
+                .OrderBy(x => x.ДатаКонца);
+
+            return this.Json(спринты
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Название,
+                                    dateStart = x.ДатаНачала.ToString("o"),
+                                    dateFinish = x.ДатаКонца.ToString("o")
+                                }),
+                 JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetPastSprints(int projectId)
+        {
+            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                .Where(спринт => спринт.ДатаКонца < DateTime.Now)
+                .OrderBy(x => x.ДатаКонца);
+
+            return this.Json(спринты
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Название,
+                                    dateStart = x.ДатаНачала.ToString("o"),
+                                    dateFinish = x.ДатаКонца.ToString("o")
+                                }),
+                 JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetFutureSprints(int projectId)
+        {
+            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                .Where(спринт => спринт.ДатаНачала > DateTime.Now)
+                .OrderBy(x => x.ДатаКонца);
+
+            return this.Json(спринты
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Название,
+                                    dateStart = x.ДатаНачала.ToString("o"),
+                                    dateFinish = x.ДатаКонца.ToString("o")
                                 }),
                  JsonRequestBehavior.AllowGet);
         }

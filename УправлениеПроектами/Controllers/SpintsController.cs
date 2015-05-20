@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using МенеджерБД.Домен;
+using УправлениеПроектами.Helpers;
 using УправлениеПроектами.Models.КлассыДляФормВвода;
 
 namespace УправлениеПроектами.Controllers
@@ -68,6 +69,53 @@ namespace УправлениеПроектами.Controllers
             }
 
             return !отменитьСохранение;
+        }
+
+        protected override Спринт ПолучитьСущностьДляСоздания()
+        {
+            Спринт спринт = new Спринт();
+
+            int idПроекта = Конвертер.ВЧисло32(Request["projectId"]);
+            if (idПроекта != 0)
+            {
+                спринт.Проект = new Проект() { Id = idПроекта };
+            }
+
+            спринт.Название = Request["name"];
+
+            спринт.ДатаНачала = Convert.ToDateTime(Request["dateStart"]);
+            спринт.ДатаКонца = Convert.ToDateTime(Request["dateFinish"]);
+
+            return спринт;
+        }
+
+        protected override Спринт ПолучитьСущностьДляОбновления()
+        {
+            int id = Конвертер.ВЧисло32(Request["id"]);
+            Спринт спринт = МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id);
+
+            if (спринт != null)
+            {
+                int idПроекта = Конвертер.ВЧисло32(Request["projectId"]);
+                if (idПроекта != 0)
+                {
+                    спринт.Проект = new Проект() { Id = idПроекта };
+                }
+                if (Request["name"] != null)
+                {
+                    спринт.Название = Request["name"];
+                }
+                if (Request["dateStart"] != null)
+                {
+                    спринт.ДатаНачала = Convert.ToDateTime(Request["dateStart"]);
+                }
+                if (Request["dateFinish"] != null)
+                {
+                    спринт.ДатаКонца = Convert.ToDateTime(Request["dateFinish"]);
+                }
+            }
+
+            return спринт;
         }
 
         #endregion
