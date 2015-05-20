@@ -14,6 +14,10 @@
       <key column="Author_id" />
       <one-to-many class="Требование"/>
     </set>
+    <set name="Назначения" lazy="false">
+      <key column="executor_id" />
+      <one-to-many class="Назначение"/>
+    </set>
     <set name="СозданныеЗадачи" lazy="false">
       <key column="Author_id" />
       <one-to-many class="Задача"/>

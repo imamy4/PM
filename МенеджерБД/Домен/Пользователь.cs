@@ -11,6 +11,7 @@ namespace МенеджерБД.Домен
         public Пользователь()
         {
             СозданныеТребования = new HashSet<Требование>();
+            Назначения = new HashSet<Назначение>();
             СозданныеЗадачи = new HashSet<Задача>();
             НазначенныеЗадачи = new HashSet<Задача>();
         }
@@ -24,6 +25,7 @@ namespace МенеджерБД.Домен
         public virtual DateTime ДатаИзменения { get; set; }
 
         public virtual ISet<Требование> СозданныеТребования { get; protected set; }
+        public virtual ISet<Назначение> Назначения { get; protected set; }
         public virtual ISet<Задача> СозданныеЗадачи { get; protected set; }
         public virtual ISet<Задача> НазначенныеЗадачи { get; protected set; }
         
