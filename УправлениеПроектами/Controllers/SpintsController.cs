@@ -139,6 +139,8 @@ namespace УправлениеПроектами.Controllers
                            name = x.Название,
                            importance = x.Важность,
                            estimate = x.Оценка,
+                           executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
+                           executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
                            author_name = x.Автор.Имя,
                            author_surname = x.Автор.Фамилия,
                            categoryId = x.Категория == null ? 0 : x.Категория.Id,

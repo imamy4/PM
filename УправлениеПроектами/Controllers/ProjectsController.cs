@@ -97,7 +97,9 @@ namespace УправлениеПроектами.Controllers
                                     usCount = x.КоличествоТребований(),
                                     resolvedUsCount = x.КоличествоРешенныхТребований(),
                                     assigmentUsCount = x.КоличествоНазначенныхТребований(),
-                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований(),
+                                    sprintPower = x.ВременнаяМощностьСпринта(),
+                                    sumEstimate = x.СуммарнаяОценкаРабот()
                                 }),
                  JsonRequestBehavior.AllowGet);
         }
@@ -115,9 +117,12 @@ namespace УправлениеПроектами.Controllers
                                     name = x.Название,
                                     dateStart = x.ДатаНачала.ToString("o"),
                                     dateFinish = x.ДатаКонца.ToString("o"),
+                                    usCount = x.КоличествоТребований(),
                                     resolvedUsCount = x.КоличествоРешенныхТребований(),
                                     assigmentUsCount = x.КоличествоНазначенныхТребований(),
-                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований(),
+                                    sprintPower = x.ВременнаяМощностьСпринта(),
+                                    sumEstimate = x.СуммарнаяОценкаРабот()
                                 }),
                  JsonRequestBehavior.AllowGet);
         }
@@ -135,9 +140,27 @@ namespace УправлениеПроектами.Controllers
                                     name = x.Название,
                                     dateStart = x.ДатаНачала.ToString("o"),
                                     dateFinish = x.ДатаКонца.ToString("o"),
+                                    usCount = x.КоличествоТребований(),
                                     resolvedUsCount = x.КоличествоРешенныхТребований(),
                                     assigmentUsCount = x.КоличествоНазначенныхТребований(),
-                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований(),
+                                    sprintPower = x.ВременнаяМощностьСпринта(),
+                                    sumEstimate = x.СуммарнаяОценкаРабот()
+                                }),
+                 JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetUsers(int projectId, bool includeEmpty = false)
+        {
+            List<Пользователь> пользователи = new List<Пользователь>();
+            пользователи.Add(new Пользователь() { Id = 0, Имя = "-", Фамилия = ""});
+            пользователи.AddRange(МенеджерБД.Записи<Пользователь>());
+
+            return this.Json(пользователи
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Имя + " " + x.Фамилия,
                                 }),
                  JsonRequestBehavior.AllowGet);
         }

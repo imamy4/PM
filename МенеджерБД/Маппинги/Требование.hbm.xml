@@ -14,7 +14,7 @@
     <many-to-one name="Автор" column="Author_id" />
     <many-to-one name="Категория" column="Category_id" not-null="false" />
 
-    <set name="Назначения" lazy="false">
+    <set name="Назначения" lazy="false" cascade="all">
       <key column="user_story_id" />
       <one-to-many class="Назначение"/>
     </set>
