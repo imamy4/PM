@@ -173,6 +173,7 @@
     <Compile Include="Global\NHibernate\NHelpers.cs" />
     <Compile Include="Global\NHibernate\NHIbernateHttpModule.cs" />
     <Compile Include="Helpers\DataBase\РасширениеМенеджераБД.cs" />
+    <Compile Include="Helpers\DataBase\РасширениеСущностейБД.cs" />
     <Compile Include="Helpers\Конвертер.cs" />
     <Compile Include="Models\КлассыДляФормВвода\БазоваяМодельСущностиБД.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ДанныеВходаВСистему.cs" />
@@ -720,8 +721,11 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CustomScripts\grid-backlog.js" />
+    <Content Include="Scripts\CustomScripts\grid-user-stories.js" />
     <Content Include="Scripts\CustomScripts\grid-sprints.js" />
     <Content Include="Scripts\CustomScripts\win-create-sprint.js" />
+    <Content Include="Scripts\CustomScripts\win-sprint.js" />
     <Content Include="Scripts\CustomScripts\win-create-user-story.js" />
     <Content Include="Scripts\CustomScripts\project-desktop.js" />
     <Content Include="Scripts\CustomScripts\app.js" />
@@ -791,6 +795,7 @@
     <Content Include="Views\Shared\_AuthError.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Projects\Desktop.cshtml" />
+    <Content Include="Views\Sprints\Desktop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

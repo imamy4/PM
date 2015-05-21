@@ -93,7 +93,11 @@ namespace УправлениеПроектами.Controllers
                                     id = x.Id,
                                     name = x.Название,
                                     dateStart = x.ДатаНачала.ToString("o"),
-                                    dateFinish = x.ДатаКонца.ToString("o")
+                                    dateFinish = x.ДатаКонца.ToString("o"),
+                                    usCount = x.КоличествоТребований(),
+                                    resolvedUsCount = x.КоличествоРешенныхТребований(),
+                                    assigmentUsCount = x.КоличествоНазначенныхТребований(),
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
                                 }),
                  JsonRequestBehavior.AllowGet);
         }
@@ -110,7 +114,10 @@ namespace УправлениеПроектами.Controllers
                                     id = x.Id,
                                     name = x.Название,
                                     dateStart = x.ДатаНачала.ToString("o"),
-                                    dateFinish = x.ДатаКонца.ToString("o")
+                                    dateFinish = x.ДатаКонца.ToString("o"),
+                                    resolvedUsCount = x.КоличествоРешенныхТребований(),
+                                    assigmentUsCount = x.КоличествоНазначенныхТребований(),
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
                                 }),
                  JsonRequestBehavior.AllowGet);
         }
@@ -127,7 +134,10 @@ namespace УправлениеПроектами.Controllers
                                     id = x.Id,
                                     name = x.Название,
                                     dateStart = x.ДатаНачала.ToString("o"),
-                                    dateFinish = x.ДатаКонца.ToString("o")
+                                    dateFinish = x.ДатаКонца.ToString("o"),
+                                    resolvedUsCount = x.КоличествоРешенныхТребований(),
+                                    assigmentUsCount = x.КоличествоНазначенныхТребований(),
+                                    notAssigmentusCount = x.КоличествоНеНазначенныхТребований()
                                 }),
                  JsonRequestBehavior.AllowGet);
         }

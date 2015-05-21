@@ -125,6 +125,16 @@ namespace УправлениеПроектами.Controllers
                             : null;
                     }
                 }
+                if (Request["sprintId"] != null)
+                {
+                    int idСпринта = Конвертер.ВЧисло32(Request["sprintId"], -1);
+                    if (idСпринта != -1)
+                    {
+                        требование.Спринт = idСпринта != 0
+                            ? new Спринт { Id = idСпринта }
+                            : null;
+                    }
+                }
             }
 
             return требование;

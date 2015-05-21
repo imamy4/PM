@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <!--подключение ExtJS------------------------------------------>
-    @Styles.Render("~/Content/css/ExtJS")
-    @Scripts.Render("~/bundles/ExtJS")
+    @*@Styles.Render("~/Content/css/ExtJS")
+    @Scripts.Render("~/bundles/ExtJS")*@
     <!--основной скриптовый файл приложения------------------------>
     @Scripts.Render("~/bundles/app")
     <!--стили приложения------------------------------------------->
     @Styles.Render("~/Content/css")
-  @*  @Styles.Render("~/Content/bootstrap")*@
+    @Styles.Render("~/Content/bootstrap")
     @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
 </head>

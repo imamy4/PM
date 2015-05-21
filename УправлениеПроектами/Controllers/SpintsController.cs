@@ -119,5 +119,32 @@ namespace УправлениеПроектами.Controllers
         }
 
         #endregion
+
+        public ActionResult Desktop(int id)
+        {
+            Спринт спринт = МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id);
+
+            return View(спринт);
+        }
+
+        public JsonResult GetUserStories(int id)
+        {
+            Спринт спринт = МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id);
+            ISet<Требование> требования = спринт != null ? спринт.Требования : new HashSet<Требование>();
+
+            return this.Json(требования
+                       .Select(x => new
+                       {
+                           id = x.Id,
+                           name = x.Название,
+                           importance = x.Важность,
+                           estimate = x.Оценка,
+                           author_name = x.Автор.Имя,
+                           author_surname = x.Автор.Фамилия,
+                           categoryId = x.Категория == null ? 0 : x.Категория.Id,
+                           categoryName = x.Категория == null ? "" : x.Категория.Название
+                       }),
+        JsonRequestBehavior.AllowGet);
+        }
     }
 }
