@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using МенеджерБД;
 using МенеджерБД.Домен;
 
 namespace УправлениеПроектами
@@ -98,6 +100,16 @@ namespace УправлениеПроектами
         public static bool ВРаботе(this СтатусТребования статус)
         {
             return !статус.Новое && !статус.Решенное;
+        }
+
+        #endregion
+
+        #region Пользователь
+
+        public static IEnumerable<Требование> НазначенныеТреования(this Пользователь пользователь)
+        {
+            return DependencyResolver.Current.GetService<IМенеджерБД>()
+                .Записи<Требование>(требование => требование.Исполнитель() == пользователь);
         }
 
         #endregion

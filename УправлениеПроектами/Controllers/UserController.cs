@@ -101,5 +101,71 @@ namespace УправлениеПроектами.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Возвращает список требований назначенных на текущего пользователя 
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetAssignmentedUserStories()
+        {
+            List<Требование> требования = new List<Требование>();
+
+            if (ТекущийПользователь != null)
+            {
+                требования.AddRange(ТекущийПользователь.НазначенныеТреования());
+            }
+
+            return this.Json(требования
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Название,
+                                    importance = x.Важность,
+                                    estimate = x.Оценка,
+                                    executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
+                                    executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                                    statusId = x.Статус == null ? 0 : x.Статус.Id,
+                                    statusName = x.Статус == null ? string.Empty : x.Статус.Название,
+                                    statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,
+                                    author_name = x.Автор.Имя,
+                                    author_surname = x.Автор.Фамилия,
+                                    categoryId = x.Категория == null ? 0 : x.Категория.Id,
+                                    categoryName = x.Категория == null ? string.Empty : x.Категория.Название
+                                }),
+                JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Возвращает список требований созданных текущим пользователем
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetCreatedUserStories()
+        {
+            List<Требование> требования = new List<Требование>();
+
+            if (ТекущийПользователь != null)
+            {
+                требования.AddRange(ТекущийПользователь.СозданныеТребования);
+            }
+            
+            return this.Json(требования
+                                .Select(x => new
+                                {
+                                    id = x.Id,
+                                    name = x.Название,
+                                    importance = x.Важность,
+                                    estimate = x.Оценка,
+                                    executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
+                                    executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                                    statusId = x.Статус == null ? 0 : x.Статус.Id,
+                                    statusName = x.Статус == null ? string.Empty : x.Статус.Название,
+                                    statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,
+                                    author_name = x.Автор.Имя,
+                                    author_surname = x.Автор.Фамилия,
+                                    categoryId = x.Категория == null ? 0 : x.Категория.Id,
+                                    categoryName = x.Категория == null ? string.Empty : x.Категория.Название
+                                }),
+                JsonRequestBehavior.AllowGet);
+        }
     }
 }
