@@ -82,13 +82,15 @@ namespace УправлениеПроектами.Controllers
             требование.Важность = Конвертер.ВЧисло32(Request["importance"]);
             требование.Оценка = Конвертер.ВЧисло32(Request["estimate"]);
 
-            требование.Проект = new Проект { Id = Конвертер.ВЧисло32(Request["projectId"]) };
+            int idПроекта = Конвертер.ВЧисло32(Request["projectId"]);
+            требование.Проект = new Проект { Id = idПроекта };
             int idКатегории = Конвертер.ВЧисло32(Request["categoryId"]);
             if (idКатегории != 0)
             {
                 требование.Категория = new КатегорияТребования { Id = idКатегории };
             }
-
+            требование.Статус = МенеджерБД.Записи<СтатусТребования>(статус => статус.Проект.Id == idПроекта && статус.Новое).FirstOrDefault();
+          
             return требование;
         }
 
@@ -160,6 +162,16 @@ namespace УправлениеПроектами.Controllers
                         }
                     }
                 }
+                if (Request["statusId"] != null)
+                {
+                    int idСтатуса = Конвертер.ВЧисло32(Request["statusId"], -1);
+                    if (idСтатуса != -1)
+                    {
+                        требование.Статус = idСтатуса != 0
+                            ? new СтатусТребования { Id = idСтатуса }
+                            : null;
+                    }
+                }
             }
 
             return требование;
@@ -193,6 +205,20 @@ namespace УправлениеПроектами.Controllers
             }
 
             return this.Json(категории.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetStatusJumps(int? statusId)
+        {
+            List<СтатусТребования> статусы = new List<СтатусТребования>();
+
+            if (statusId.HasValue)
+            {
+                СтатусТребования статус = МенеджерБД.ПолучитьЗаписьБДПоId<СтатусТребования>(statusId.Value);
+                статусы.Add(статус);
+                статусы.AddRange(статус.ВозможныеПереходы);
+            }
+
+            return this.Json(статусы.Select(x => new { id = x.Id, name = x.Название }), JsonRequestBehavior.AllowGet);
         }
     }
 }

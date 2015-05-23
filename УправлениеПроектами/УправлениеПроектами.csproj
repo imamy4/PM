@@ -156,7 +156,6 @@
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UserStoriesController.cs" />
     <Compile Include="Controllers\SpintsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -179,7 +178,6 @@
     <Compile Include="Models\КлассыДляФормВвода\ДанныеВходаВСистему.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПользовательРегистрации.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ПроектДляФормы.cs" />
-    <Compile Include="Models\КлассыДляФормВвода\ЗадачаДляФормы.cs" />
     <Compile Include="Models\КлассыДляФормВвода\ТребованиеДляФормы.cs" />
     <Compile Include="Models\КлассыДляФормВвода\СпринтДляФормы.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -728,10 +726,8 @@
     <Content Include="Scripts\CustomScripts\win-sprint.js" />
     <Content Include="Scripts\CustomScripts\win-create-user-story.js" />
     <Content Include="Scripts\CustomScripts\project-desktop.js" />
-    <Content Include="Scripts\CustomScripts\app.js" />
     <Content Include="Scripts\ExtJS\ext-all-debug.js" />
     <Content Include="Scripts\ExtJS\resources\css\ext-all.css" />
-    <Content Include="Scripts\CustomScripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -788,10 +784,6 @@
     <Content Include="Views\UserStories\Id.cshtml" />
     <Content Include="Views\UserStories\Success.cshtml" />
     <Content Include="Views\UserStories\Create.cshtml" />
-    <Content Include="Views\Tasks\Create.cshtml" />
-    <Content Include="Views\Tasks\Id.cshtml" />
-    <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Tasks\Success.cshtml" />
     <Content Include="Views\Shared\_AuthError.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Projects\Desktop.cshtml" />

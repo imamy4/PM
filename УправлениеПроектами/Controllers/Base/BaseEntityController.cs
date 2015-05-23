@@ -110,17 +110,15 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public ActionResult CreateExt()
         {
-            if (ТекущийПользователь == null)
-            {
-                return View("_AuthError");
-            }
-
             bool удачноеСохранение = false;
-            
-            T сущность = ПолучитьСущностьДляСоздания();
-            if(сущность != null)
+
+            if (ТекущийПользователь != null)
             {
-                удачноеСохранение = МенеджерБД.СоздатьЗаписьБД<T>(сущность);
+                T сущность = ПолучитьСущностьДляСоздания();
+                if (сущность != null)
+                {
+                    удачноеСохранение = МенеджерБД.СоздатьЗаписьБД<T>(сущность);
+                }
             }
 
             return this.Json(new { success = удачноеСохранение }, JsonRequestBehavior.AllowGet);
@@ -132,19 +130,17 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public ActionResult UpdateExt()
         {
-            if (ТекущийПользователь == null)
-            {
-                return View("_AuthError");
-            }
-
             bool удачноеОбновление = false;
 
-            T сущность = ПолучитьСущностьДляОбновления();
-            if (сущность != null)
+            if (ТекущийПользователь != null)
             {
-               удачноеОбновление = МенеджерБД.ОбновитьЗаписьБД<T>(сущность);
+                T сущность = ПолучитьСущностьДляОбновления();
+                if (сущность != null)
+                {
+                    удачноеОбновление = МенеджерБД.ОбновитьЗаписьБД<T>(сущность);
+                }
             }
-
+          
             return this.Json(new { success = удачноеОбновление }, JsonRequestBehavior.AllowGet);
         }
 

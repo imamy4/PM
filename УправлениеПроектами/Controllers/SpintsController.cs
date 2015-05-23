@@ -141,10 +141,13 @@ namespace УправлениеПроектами.Controllers
                            estimate = x.Оценка,
                            executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
                            executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                           statusId = x.Статус == null ? 0 : x.Статус.Id,
+                           statusName = x.Статус == null ? string.Empty : x.Статус.Название,
+                           statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,
                            author_name = x.Автор.Имя,
                            author_surname = x.Автор.Фамилия,
                            categoryId = x.Категория == null ? 0 : x.Категория.Id,
-                           categoryName = x.Категория == null ? "" : x.Категория.Название
+                           categoryName = x.Категория == null ? string.Empty : x.Категория.Название
                        }),
         JsonRequestBehavior.AllowGet);
         }
