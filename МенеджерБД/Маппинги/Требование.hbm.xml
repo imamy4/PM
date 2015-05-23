@@ -13,14 +13,11 @@
     <many-to-one name="Спринт" column="Sprint_id" not-null="false" />
     <many-to-one name="Автор" column="Author_id" />
     <many-to-one name="Категория" column="Category_id" not-null="false" />
+    <many-to-one name="Статус" column="Status_id" not-null="false" />
 
     <set name="Назначения" lazy="false" cascade="all">
       <key column="user_story_id" />
       <one-to-many class="Назначение"/>
-    </set>
-    <set name="Задачи" lazy="false">
-      <key column="User_story_id" />
-      <one-to-many class="Задача"/>
     </set>
   </class>
 

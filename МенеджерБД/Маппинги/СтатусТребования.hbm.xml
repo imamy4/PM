@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
+
+  <class name="СтатусТребования" table="pm.US_Statuses" lazy="false">
+    <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
+    <property name="Название" column="Name" />
+    <property name="Новое" column="IsNew" />
+    <property name="Решенное" column="IsResolved" />
+
+    <many-to-one name="Проект" column="Project_id"/>
+
+    <bag name="ВозможныеПереходы"  table="pm.us_status_jumps" inverse="true" lazy="false">
+      <key column="From"/>
+      <many-to-many class="СтатусТребования" column="To" />
+    </bag>
+
+    <set name="Требования" lazy="false">
+      <key column="Category_id" />
+      <one-to-many class="Требование"/>
+    </set>
+  </class>
+
+</hibernate-mapping>

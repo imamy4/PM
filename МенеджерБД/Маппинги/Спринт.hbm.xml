@@ -14,10 +14,6 @@
       <key column="Sprint_id" />
       <one-to-many class="Требование"/>
     </set>
-    <set name="Задачи" lazy="false">
-      <key column="Sprint_id" />
-      <one-to-many class="Задача"/>
-    </set>
   </class>
 
 </hibernate-mapping>

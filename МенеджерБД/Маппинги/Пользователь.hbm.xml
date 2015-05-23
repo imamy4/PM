@@ -18,14 +18,6 @@
       <key column="executor_id" />
       <one-to-many class="Назначение"/>
     </set>
-    <set name="СозданныеЗадачи" lazy="false">
-      <key column="Author_id" />
-      <one-to-many class="Задача"/>
-    </set>
-    <set name="НазначенныеЗадачи" lazy="false">
-      <key column="Current_executor_id" />
-      <one-to-many class="Задача"/>
-    </set>
   </class>
 
 </hibernate-mapping>

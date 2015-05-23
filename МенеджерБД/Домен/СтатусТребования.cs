@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 
 namespace МенеджерБД.Домен
 {
-    public class Спринт : IЗаписьБД
+    public class СтатусТребования : IЗаписьБД
     {
-        public Спринт()
+        public СтатусТребования()
         {
             Требования = new HashSet<Требование>();
+            ВозможныеПереходы = new List<СтатусТребования>();
         }
 
         public virtual int Id { get; set; }
-
         public virtual string Название { get; set; }
-        public virtual DateTime ДатаНачала { get; set; }
-        public virtual DateTime ДатаКонца { get; set; }
+
+        public virtual bool Новое { get; set; }
+        public virtual bool Решенное { get; set; }
 
         public virtual Проект Проект { get; set; }
 
         public virtual ISet<Требование> Требования { get; protected set; }
+        public virtual IList<СтатусТребования> ВозможныеПереходы { get; protected set; }
     }
 }

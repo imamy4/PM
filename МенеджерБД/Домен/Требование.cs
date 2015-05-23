@@ -10,7 +10,6 @@ namespace МенеджерБД.Домен
     {
         public Требование()
         {
-            Задачи = new HashSet<Задача>();
             Назначения = new HashSet<Назначение>();
         }
 
@@ -25,8 +24,8 @@ namespace МенеджерБД.Домен
         public virtual Спринт Спринт { get; set; }
         public virtual Пользователь Автор { get; set; }
         public virtual КатегорияТребования Категория { get; set; }
+        public virtual СтатусТребования Статус { get; set; }
 
         public virtual ISet<Назначение> Назначения { get; protected set; }
-        public virtual ISet<Задача> Задачи { get; protected set; }
     }
 }

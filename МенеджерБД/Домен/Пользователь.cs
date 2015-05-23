@@ -12,8 +12,6 @@ namespace МенеджерБД.Домен
         {
             СозданныеТребования = new HashSet<Требование>();
             Назначения = new HashSet<Назначение>();
-            СозданныеЗадачи = new HashSet<Задача>();
-            НазначенныеЗадачи = new HashSet<Задача>();
         }
 
         public virtual int Id { get; set; }
@@ -26,8 +24,6 @@ namespace МенеджерБД.Домен
 
         public virtual ISet<Требование> СозданныеТребования { get; protected set; }
         public virtual ISet<Назначение> Назначения { get; protected set; }
-        public virtual ISet<Задача> СозданныеЗадачи { get; protected set; }
-        public virtual ISet<Задача> НазначенныеЗадачи { get; protected set; }
         
         public virtual bool ИмеетРоль(string кодРоли)
         {
