@@ -24,11 +24,5 @@ namespace МенеджерБД.Домен
 
         public virtual ISet<Требование> СозданныеТребования { get; protected set; }
         public virtual ISet<Назначение> Назначения { get; protected set; }
-        
-        public virtual bool ИмеетРоль(string кодРоли)
-        {
-            System.Diagnostics.Debug.WriteLine("ИмеетРоль не определен.");
-            return true;
-        }
     }
 }

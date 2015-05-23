@@ -12,10 +12,6 @@ namespace УправлениеПроектами.Controllers
 {
     public class UserController : BaseController
     {
-        int idРолиПользователь = 2;
-        //
-        // GET: /User/
-
         public ActionResult Index()
         {
             return View();

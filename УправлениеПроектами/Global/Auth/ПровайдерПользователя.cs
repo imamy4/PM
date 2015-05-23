@@ -39,7 +39,7 @@ namespace УправлениеПроектами.Global.Auth
             {
                 return false;
             }
-            return пользовательIdentity.Пользователь.ИмеетРоль(кодРоли);
+            return true;
         }
 
         #endregion
