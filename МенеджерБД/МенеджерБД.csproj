@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Домен\IЗаписьБД.cs" />
+    <Compile Include="Домен\Роль.cs" />
     <Compile Include="Домен\СтатусТребования.cs" />
     <Compile Include="Домен\КатегорияТребования.cs" />
     <Compile Include="Домен\Назначение.cs" />
@@ -82,6 +83,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Маппинги\Роль.hbm.xml" />
     <EmbeddedResource Include="Маппинги\СтатусТребования.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Назначение.hbm.xml" />
     <EmbeddedResource Include="Маппинги\КатегорияТребования.hbm.xml" />

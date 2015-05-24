@@ -10,6 +10,11 @@
     <property name="ДатаРегистрации" column="DateCreate" />
     <property name="ДатаИзменения" column="DateEdit" />
 
+    <bag name="Роли" table="pm.User_roles" lazy="false">
+      <key column="user_id"/>
+      <many-to-many class="Роль" column="role_id"/>
+    </bag>
+
     <set name="СозданныеТребования" lazy="false">
       <key column="Author_id" />
       <one-to-many class="Требование"/>

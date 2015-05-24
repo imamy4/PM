@@ -73,16 +73,25 @@ namespace УправлениеПроектами.Controllers
 
         protected override Требование ПолучитьСущностьДляСоздания()
         {
+            int idПроекта = Конвертер.ВЧисло32(Request["projectId"]);
+
+            if (!ТекущийПользователь.ЯвляетсяУчастникомПроекта(idПроекта))
+            {
+                return null;
+            }
+
             Требование требование = new Требование();
             требование.Автор = ТекущийПользователь;
 
             требование.Название = Request["name"];
             требование.Описание = Request["description"];
 
-            требование.Важность = Конвертер.ВЧисло32(Request["importance"]);
+            if (ТекущийПользователь.ЯвляетсяМенеджеромПроект(idПроекта))
+            {
+                требование.Важность = Конвертер.ВЧисло32(Request["importance"]);
+            }
             требование.Оценка = Конвертер.ВЧисло32(Request["estimate"]);
 
-            int idПроекта = Конвертер.ВЧисло32(Request["projectId"]);
             требование.Проект = new Проект { Id = idПроекта };
             int idКатегории = Конвертер.ВЧисло32(Request["categoryId"]);
             if (idКатегории != 0)
@@ -99,7 +108,7 @@ namespace УправлениеПроектами.Controllers
             int id = Конвертер.ВЧисло32(Request["id"]);
             Требование требование = МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(id);
 
-            if (требование != null)
+            if (требование != null && ТекущийПользователь.ЯвляетсяУчастникомПроекта(требование.Проект))
             {
                 if (Request["name"] != null)
                 {
@@ -185,7 +194,8 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public JsonResult GetProjects()
         {
-            IEnumerable<Проект> проекты = МенеджерБД.АктуальныеПроекты();
+            IEnumerable<Проект> проекты = МенеджерБД.АктуальныеПроекты()
+                .Where(проект => ТекущийПользователь.ЯвляетсяУчастникомПроекта(проект));
 
             return this.Json(проекты.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
         }
@@ -197,11 +207,14 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public JsonResult GetCategories(int? projectId, bool includeEmpty = false)
         {
-            IEnumerable<КатегорияТребования> категории = МенеджерБД.Записи<КатегорияТребования>(x => projectId.HasValue && x.Проект.Id == projectId.Value);
-            if (includeEmpty)
+            IEnumerable<КатегорияТребования> категории = new List<КатегорияТребования>();
+            if (projectId.HasValue && ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId.Value))
             {
-                категории = new List<КатегорияТребования>(категории);
-                ((List<КатегорияТребования>)категории).Add(new КатегорияТребования() { Id = 0, Название = "-" });
+                if (includeEmpty)
+                {
+                    ((List<КатегорияТребования>)категории).Add(new КатегорияТребования() { Id = 0, Название = "-" });
+                }
+                ((List<КатегорияТребования>)категории).AddRange(МенеджерБД.Записи<КатегорияТребования>(x => projectId.HasValue && x.Проект.Id == projectId.Value));
             }
 
             return this.Json(категории.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);

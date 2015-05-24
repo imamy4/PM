@@ -10,6 +10,7 @@ namespace МенеджерБД.Домен
     {
         public Пользователь()
         {
+            Роли = new List<Роль>();
             СозданныеТребования = new HashSet<Требование>();
             Назначения = new HashSet<Назначение>();
         }
@@ -22,6 +23,7 @@ namespace МенеджерБД.Домен
         public virtual DateTime ДатаРегистрации { get; set; }
         public virtual DateTime ДатаИзменения { get; set; }
 
+        public virtual IList<Роль> Роли { get; protected set; }
         public virtual ISet<Требование> СозданныеТребования { get; protected set; }
         public virtual ISet<Назначение> Назначения { get; protected set; }
     }

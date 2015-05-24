@@ -20,7 +20,8 @@ namespace УправлениеПроектами.Controllers
         
         protected override IEnumerable<Проект> ПолучитьСущности()
         {
-            return МенеджерБД.АктуальныеПроекты();
+            return МенеджерБД.АктуальныеПроекты()
+                            .Where(проект => ТекущийПользователь.ЯвляетсяУчастникомПроекта(проект));
         }
 
         protected override БазоваяМодельСущностиБД<Проект> ПолучитьЭкземплярМодели()
@@ -54,18 +55,28 @@ namespace УправлениеПроектами.Controllers
         /// <summary>
         /// Рабочая страница проекта
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id проекта</param>
         /// <returns></returns>
         public ActionResult Desktop(int id)
         {
+            if (!ТекущийПользователь.ЯвляетсяУчастникомПроекта(id))
+            {
+                return View("_AuthError");
+            }
+
             return View(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(id));
         }
 
         public JsonResult GetBacklog(int projectId)
         {
-            IEnumerable<Требование> бэклог = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Требования
-                .Where(x => x.Спринт == null).OrderBy(x => -x.Важность);
-        
+            IEnumerable<Требование> бэклог = new List<Требование>();
+
+            if (ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId))
+            {
+                МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Требования
+                    .Where(x => x.Спринт == null).OrderBy(x => -x.Важность);
+            }
+
             return this.Json(бэклог
                                 .Select(x => new 
                                 { 
@@ -83,9 +94,15 @@ namespace УправлениеПроектами.Controllers
 
         public JsonResult GetCurrentSprints(int projectId)
         {
-            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
-                .Where(спринт => спринт.ДатаНачала <= DateTime.Now && спринт.ДатаКонца >= DateTime.Now)
-                .OrderBy(x => x.ДатаКонца);
+            IEnumerable<Спринт> спринты = new List<Спринт>();
+
+            if (ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId))
+            {
+
+                спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                    .Where(спринт => спринт.ДатаНачала <= DateTime.Now && спринт.ДатаКонца >= DateTime.Now)
+                    .OrderBy(x => x.ДатаКонца);
+            }
 
             return this.Json(спринты
                                 .Select(x => new
@@ -108,9 +125,14 @@ namespace УправлениеПроектами.Controllers
 
         public JsonResult GetPastSprints(int projectId)
         {
-            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
-                .Where(спринт => спринт.ДатаКонца < DateTime.Now)
-                .OrderBy(x => x.ДатаКонца);
+            IEnumerable<Спринт> спринты = new List<Спринт>();
+
+            if (ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId))
+            {
+                спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                    .Where(спринт => спринт.ДатаКонца < DateTime.Now)
+                    .OrderBy(x => x.ДатаКонца);
+            }
 
             return this.Json(спринты
                                 .Select(x => new
@@ -133,10 +155,14 @@ namespace УправлениеПроектами.Controllers
 
         public JsonResult GetFutureSprints(int projectId)
         {
-            IEnumerable<Спринт> спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
-                .Where(спринт => спринт.ДатаНачала > DateTime.Now)
-                .OrderBy(x => x.ДатаКонца);
+            IEnumerable<Спринт> спринты = new List<Спринт>();
 
+            if (ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId))
+            {
+                спринты = МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId).Спринты
+                    .Where(спринт => спринт.ДатаНачала > DateTime.Now)
+                    .OrderBy(x => x.ДатаКонца);
+            }
             return this.Json(спринты
                                 .Select(x => new
                                 {
@@ -159,8 +185,12 @@ namespace УправлениеПроектами.Controllers
         public JsonResult GetUsers(int projectId, bool includeEmpty = false)
         {
             List<Пользователь> пользователи = new List<Пользователь>();
-            пользователи.Add(new Пользователь() { Id = 0, Имя = "-", Фамилия = ""});
-            пользователи.AddRange(МенеджерБД.Записи<Пользователь>());
+
+            if (ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId))
+            {
+                пользователи.Add(new Пользователь() { Id = 0, Имя = "-", Фамилия = "" });
+                пользователи.AddRange(МенеджерБД.Записи<Пользователь>());
+            }
 
             return this.Json(пользователи
                                 .Select(x => new
