@@ -13,6 +13,7 @@ namespace МенеджерБД.Домен
             Роли = new List<Роль>();
             СозданныеТребования = new HashSet<Требование>();
             Назначения = new HashSet<Назначение>();
+            Активности = new HashSet<Активность>();
         }
 
         public virtual int Id { get; set; }
@@ -26,5 +27,6 @@ namespace МенеджерБД.Домен
         public virtual IList<Роль> Роли { get; protected set; }
         public virtual ISet<Требование> СозданныеТребования { get; protected set; }
         public virtual ISet<Назначение> Назначения { get; protected set; }
+        public virtual ISet<Активность> Активности { get; protected set; }
     }
 }

@@ -5,7 +5,6 @@ namespace МенеджерБД
 {
     using System.Linq.Expressions;
     using Домен;
-    using МенеджерБД.КритерийОтбора;
 
     public interface IМенеджерБД
     {

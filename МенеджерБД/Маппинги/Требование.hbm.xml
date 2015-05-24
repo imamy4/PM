@@ -19,6 +19,10 @@
       <key column="user_story_id" />
       <one-to-many class="Назначение"/>
     </set>
+    <set name="Активности" lazy="false">
+      <key column="user_story_id" />
+      <one-to-many class="Активность"/>
+    </set>
   </class>
 
 </hibernate-mapping>

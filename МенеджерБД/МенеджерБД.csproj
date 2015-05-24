@@ -57,15 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Домен\IЗаписьБД.cs" />
+    <Compile Include="Домен\Активность.cs" />
     <Compile Include="Домен\Роль.cs" />
     <Compile Include="Домен\СтатусТребования.cs" />
     <Compile Include="Домен\КатегорияТребования.cs" />
     <Compile Include="Домен\Назначение.cs" />
     <Compile Include="Домен\Требование.cs" />
     <Compile Include="Домен\Спринт.cs" />
-    <Compile Include="КритерийОтбора\ДопУсловия.cs" />
-    <Compile Include="КритерийОтбора\Критерий.cs" />
-    <Compile Include="КритерийОтбора\ТипыСравнения.cs" />
     <Compile Include="Репозиторий\IМенеджерБД.cs" />
     <Compile Include="Репозиторий\NHibernate\NHМенеджерБД.cs" />
     <Compile Include="Домен\Пользователь.cs" />
@@ -83,6 +81,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="Маппинги\Активность.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Роль.hbm.xml" />
     <EmbeddedResource Include="Маппинги\СтатусТребования.hbm.xml" />
     <EmbeddedResource Include="Маппинги\Назначение.hbm.xml" />

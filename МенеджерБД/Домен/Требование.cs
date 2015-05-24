@@ -11,6 +11,7 @@ namespace МенеджерБД.Домен
         public Требование()
         {
             Назначения = new HashSet<Назначение>();
+            Активности = new HashSet<Активность>();
         }
 
         public virtual int Id { get; set; }
@@ -27,5 +28,6 @@ namespace МенеджерБД.Домен
         public virtual СтатусТребования Статус { get; set; }
 
         public virtual ISet<Назначение> Назначения { get; protected set; }
+        public virtual ISet<Активность> Активности { get; protected set; }
     }
 }

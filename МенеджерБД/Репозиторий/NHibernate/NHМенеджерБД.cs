@@ -12,7 +12,6 @@ using Безопасность;
 namespace МенеджерБД
 {
     using Домен;
-    using КритерийОтбора;
 
     public partial class NHМенеджерБД : IМенеджерБД
     {

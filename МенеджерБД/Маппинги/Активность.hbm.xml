@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="МенеджерБД" namespace="МенеджерБД.Домен">
+
+  <class name="Активность" table="pm.Activity" lazy="false">
+    <id name="Id"  type="Int32" unsaved-value="0" generator="increment" />
+
+    <property name="ДатаНачала" column="DateStart" />
+    <property name="ДатаКонца" column="DateFinish" />
+
+    <many-to-one name="Требование" column="user_story_id" />
+    <many-to-one name="Пользователь" column="user_id" />
+  </class>
+
+</hibernate-mapping>
