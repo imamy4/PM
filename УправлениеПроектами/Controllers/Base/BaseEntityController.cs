@@ -46,8 +46,9 @@ namespace УправлениеПроектами.Controllers
         /// <returns></returns>
         public virtual ActionResult Create()
         {
-            return ТекущийПользователь != null
-                        ? View(ПолучитьЭкземплярМодели())
+            БазоваяМодельСущностиБД<T> модель = ПолучитьЭкземплярМодели();
+            return ТекущийПользователь != null && модель != null
+                        ? View(модель)
                         : View("_AuthError");
         }
 

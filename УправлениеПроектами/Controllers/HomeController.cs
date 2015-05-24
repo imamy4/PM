@@ -15,7 +15,9 @@ namespace УправлениеПроектами.Controllers
     {
         public ActionResult Index()
         {
-            return View(ТекущийПользователь);
+            return ТекущийПользователь != null
+                            ? (ActionResult)RedirectToAction("Index", "Projects")
+                            : View(ТекущийПользователь);
         }
 
         public ActionResult UserLogin()
