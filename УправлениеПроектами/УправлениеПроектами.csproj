@@ -722,6 +722,7 @@
     <Content Include="Scripts\CustomScripts\grid-backlog.js" />
     <Content Include="Scripts\CustomScripts\grid-user-stories.js" />
     <Content Include="Scripts\CustomScripts\grid-sprints.js" />
+    <Content Include="Scripts\CustomScripts\main-panel.js" />
     <Content Include="Scripts\CustomScripts\user-desktop-grids.js" />
     <Content Include="Scripts\CustomScripts\user-desktop.js" />
     <Content Include="Scripts\CustomScripts\win-create-sprint.js" />

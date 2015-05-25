@@ -249,7 +249,6 @@ function getUserDesktopTasksGridPanel(storeUrl) {
     return userDesktopTasksGridPanel;
 }
 
-
 function getUserDesktopSpentTimeGridPanel() {
    
     var userDesktopSpentTimeGridPanel = Ext.create('Ext.grid.Panel', {
@@ -293,13 +292,13 @@ function getUserDesktopSpentTimeGridPanel() {
             header: 'Время начала',
             dataIndex: 'dateStart',
             xtype: 'datecolumn',
-            format: 'd-m-Y h:i',
+            format: 'd-m-Y H:i',
             flex: 1,
         }, {
             header: 'Время конца',
             dataIndex: 'dateFinish',
             xtype: 'datecolumn',
-            format: 'd-m-Y h:i',
+            format: 'd-m-Y H:i',
             flex: 1,
         }, {
             header: 'Затраченное время',

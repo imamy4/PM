@@ -90,7 +90,7 @@ namespace УправлениеПроектами
         public static Назначение АктуальноеНазначение(this Требование требование)
         {
             DateTime нулеваяДата = new DateTime(3, 2, 1);
-            return требование.Назначения.FirstOrDefault(x => x.ДатаСнятия == null || x.ДатаСнятия <= нулеваяДата);
+            return требование.Назначения.FirstOrDefault(x => x.ДатаСнятия.ДатаНулевая());
         }
 
         #endregion
@@ -144,6 +144,22 @@ namespace УправлениеПроектами
                 .Select(роль => роль.Проект), new ЗаписьБДEqualityComparer());
 
             return проекты;
+        }
+
+        public static Активность ТекущаяАктивность(this Пользователь пользователь)
+        {
+            return пользователь != null
+                ? пользователь.Активности.FirstOrDefault(x => x.ДатаКонца.ДатаНулевая())
+                : null;
+        }
+
+        public static Требование ТекущееТребование(this Пользователь пользователь)
+        {
+            Активность активность = пользователь.ТекущаяАктивность();
+
+            return активность != null
+                ? активность.Требование
+                : null;
         }
 
         #endregion
@@ -235,6 +251,17 @@ namespace УправлениеПроектами
             {
                 return obj.GetType().Name.GetHashCode() + obj.Id.GetHashCode();
             }
+        }
+
+        public static bool ДатаНулевая(this DateTime? дата)
+        {
+            DateTime нулеваяДата = new DateTime(3, 2, 1);
+            return дата == null || дата <= нулеваяДата;
+        }
+
+        public static bool ДатаНулевая(this DateTime дата)
+        {
+            return new Nullable<DateTime>(дата).ДатаНулевая();
         }
     }
 }

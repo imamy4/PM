@@ -185,9 +185,41 @@ namespace УправлениеПроектами.Controllers
                     userStoryName = активность.Требование.Название,
                     dateStart = активность.ДатаНачала.ToString("o"),
                     dateFinish = активность.ДатаКонца.ToString("o"),
-                    activityTime = (активность.ДатаКонца - активность.ДатаНачала).TotalHours
+                    activityTime = активность.ЗатраченноеВремя
                 }),
                 JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCurrentActivity()
+        {
+            Активность активность = ТекущийПользователь.ТекущаяАктивность();
+            return this.Json(new
+            {
+                success = активность != null,
+                userStory = активность != null
+                ? new
+                {
+                    id = активность != null ? активность.Требование.Id.ToString() : string.Empty,
+                    name = активность != null ? активность.Требование.Название : string.Empty,
+                    dateStart = активность != null ? активность.ДатаНачала.ToString("o") : string.Empty,
+                }
+                : null,
+            },
+            JsonRequestBehavior.AllowGet);
+        }
+    
+        public JsonResult CompleteCurrentActivity()
+        {
+            bool success = false;
+
+            Активность активность = ТекущийПользователь.ТекущаяАктивность();
+            if (активность != null)
+            {
+                активность.ДатаКонца = DateTime.UtcNow;
+                success = МенеджерБД.ОбновитьЗаписьБД<Активность>(активность);
+            }
+
+            return this.Json(new { success }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace МенеджерБД.Домен
         {
             get
             {
-                return (ДатаКонца - ДатаНачала).TotalHours;
+                return Math.Round(Math.Max((ДатаКонца - ДатаНачала).TotalHours, 0), 2);
             }
         }
 
