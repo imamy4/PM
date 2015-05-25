@@ -168,11 +168,11 @@ function getUserDesktopTasksGridPanel(storeUrl) {
             summaryRenderer: function (value, summaryData, dataIndex) {
                 return Ext.String.format('<b>Количество требований: {0}</b>', value);
             },
-            width: 220
+            width: 140
         }, {
             header: 'Название',
             dataIndex: 'name',
-            width: 220,
+            width: 140,
             renderer: function (value, metaData, record) {
                 if (record.data.statusIsResolved) {
                     return Ext.String.format('<strike>{0}</strike>', value);

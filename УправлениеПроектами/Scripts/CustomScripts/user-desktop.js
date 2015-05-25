@@ -56,14 +56,55 @@ Ext.onReady(function () {
         margin: '5 5 5 5',
         layout: 'fit',
         items: [statsPanel]
-});
+    });
 
-
+    var mainMenuPanel = Ext.create('Ext.panel.Panel', {
+        frame: false,
+        layout: 'anchor',
+        dockedItems: [{
+            xtype: 'toolbar',
+            items: [
+                {
+                    xtype: 'button',
+                    text: 'Текущая задача: Сделать пагинацию гридов',
+                },
+                '|',
+                {
+                    xtype: 'button',
+                    text: 'Начата: 14-05-2015 12:38',
+                },
+                '|',
+                {
+                    xtype: 'button',
+                    text: 'Затрачено: 1:48',
+                },
+                '|',
+                {
+                    xtype: 'button',
+                    text: 'Закончить учет времени',
+                },
+                '->',
+                {
+                    xtype: 'button',
+                    text: '<b>Выйти из системы</b>',
+                    handler: function () {
+                        Ext.MessageBox.wait('Выход из системы...', 'Пожалуйста подождите');
+                        Ext.Ajax.request({
+                            url: '/Login/Logout',
+                            callback: function(response){
+                                document.location.href = '/';
+                            }
+                        });
+                    }
+                }]
+        }],
+        items: [topPanel, projectInfoPanel]
+    });
 
     Ext.create('Ext.Viewport', {
         renderTo: 'desktop',
         border: false,
-        layout: 'anchor',
-        items: [topPanel, projectInfoPanel]
+        layout: 'fit',
+        items: [mainMenuPanel]
     });
 });

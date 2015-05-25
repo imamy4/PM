@@ -124,7 +124,7 @@ namespace УправлениеПроектами.Controllers
                 }
                 if (Request["estimate"] != null)
                 {
-                    требование.Оценка = Конвертер.ВЧисло32(Request["estimate"]);
+                    требование.Оценка = Конвертер.ВДесятичноеЧисло(Request["estimate"]);
                 }
                 if (Request["categoryId"] != null)
                 {

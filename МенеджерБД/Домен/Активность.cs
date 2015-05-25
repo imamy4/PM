@@ -13,6 +13,14 @@ namespace МенеджерБД.Домен
         public virtual DateTime ДатаНачала { get; set; }
         public virtual DateTime ДатаКонца { get; set; }
 
+        public virtual double ЗатраченноеВремя
+        {
+            get
+            {
+                return (ДатаКонца - ДатаНачала).TotalHours;
+            }
+        }
+
         public virtual Требование Требование { get; set; }
         public virtual Пользователь Пользователь { get; set; }
     }

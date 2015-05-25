@@ -18,7 +18,7 @@ namespace МенеджерБД.Домен
 
         public virtual string Название { get; set; }
         public virtual string Описание { get; set; }
-        public virtual int Оценка { get; set; }
+        public virtual decimal Оценка { get; set; }
         public virtual int Важность { get; set; }
         
         public virtual Проект Проект { get; set; }

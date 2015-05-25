@@ -191,7 +191,7 @@ namespace УправлениеПроектами.Controllers
 
             if (projectId.HasValue && ТекущийПользователь.ЯвляетсяУчастникомПроекта(projectId.Value))
             {
-                пользователи.AddRange(МенеджерБД.Записи<Пользователь>());
+                пользователи.AddRange(МенеджерБД.ПолучитьЗаписьБДПоId<Проект>(projectId.Value).Пользователи());
             }
 
             return this.Json(пользователи
