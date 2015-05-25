@@ -112,7 +112,7 @@ namespace УправлениеПроектами.Controllers
 
             if (ТекущийПользователь != null)
             {
-                требования.AddRange(ТекущийПользователь.НазначенныеТребования());
+                требования.AddRange(ТекущийПользователь.НазначенныеТребования().ОткрытыеТребования());
             }
 
             return this.Json(требования
@@ -120,8 +120,11 @@ namespace УправлениеПроектами.Controllers
                                 {
                                     id = x.Id,
                                     name = x.Название,
+                                    projectId = x.Проект.Id,
+                                    projectName= x.Проект.Название,    
                                     importance = x.Важность,
                                     estimate = x.Оценка,
+                                    spentTime  = 2,
                                     executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
                                     executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
                                     statusId = x.Статус == null ? 0 : x.Статус.Id,
@@ -145,7 +148,7 @@ namespace УправлениеПроектами.Controllers
 
             if (ТекущийПользователь != null)
             {
-                требования.AddRange(ТекущийПользователь.СозданныеТребования);
+                требования.AddRange(ТекущийПользователь.СозданныеТребования.ОткрытыеТребования());
             }
             
             return this.Json(требования
@@ -153,8 +156,11 @@ namespace УправлениеПроектами.Controllers
                                 {
                                     id = x.Id,
                                     name = x.Название,
+                                    projectId = x.Проект.Id,
+                                    projectName = x.Проект.Название,
                                     importance = x.Важность,
                                     estimate = x.Оценка,
+                                    spentTime = 2,
                                     executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
                                     executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
                                     statusId = x.Статус == null ? 0 : x.Статус.Id,
@@ -165,6 +171,22 @@ namespace УправлениеПроектами.Controllers
                                     categoryId = x.Категория == null ? 0 : x.Категория.Id,
                                     categoryName = x.Категория == null ? string.Empty : x.Категория.Название
                                 }),
+                JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetLastMonthActivity()
+        {
+            IEnumerable<Активность> активности = ТекущийПользователь.Активности.Where(активность => активность.ДатаКонца > new  DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
+
+            return this.Json(активности.Select(активность =>
+                new
+                {
+                    projectName = активность.Требование.Проект.Название,
+                    userStoryName = активность.Требование.Название,
+                    dateStart = активность.ДатаНачала.ToString("o"),
+                    dateFinish = активность.ДатаКонца.ToString("o"),
+                    activityTime = (активность.ДатаКонца - активность.ДатаНачала).TotalHours
+                }),
                 JsonRequestBehavior.AllowGet);
         }
     }

@@ -722,6 +722,8 @@
     <Content Include="Scripts\CustomScripts\grid-backlog.js" />
     <Content Include="Scripts\CustomScripts\grid-user-stories.js" />
     <Content Include="Scripts\CustomScripts\grid-sprints.js" />
+    <Content Include="Scripts\CustomScripts\user-desktop-grids.js" />
+    <Content Include="Scripts\CustomScripts\user-desktop.js" />
     <Content Include="Scripts\CustomScripts\win-create-sprint.js" />
     <Content Include="Scripts\CustomScripts\win-sprint.js" />
     <Content Include="Scripts\CustomScripts\win-create-user-story.js" />
@@ -788,6 +790,7 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Projects\Desktop.cshtml" />
     <Content Include="Views\Sprints\Desktop.cshtml" />
+    <Content Include="Views\Home\Desktop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

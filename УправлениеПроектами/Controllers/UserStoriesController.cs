@@ -197,7 +197,7 @@ namespace УправлениеПроектами.Controllers
             IEnumerable<Проект> проекты = МенеджерБД.АктуальныеПроекты()
                 .Where(проект => ТекущийПользователь.ЯвляетсяУчастникомПроекта(проект));
 
-            return this.Json(проекты.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
+            return this.Json(проекты.Select(x => new { id = x.Id, name = x.Название }), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace УправлениеПроектами.Controllers
                 ((List<КатегорияТребования>)категории).AddRange(МенеджерБД.Записи<КатегорияТребования>(x => projectId.HasValue && x.Проект.Id == projectId.Value));
             }
 
-            return this.Json(категории.Select(x => new { Id = x.Id, Name = x.Название }), JsonRequestBehavior.AllowGet);
+            return this.Json(категории.Select(x => new { id = x.Id, name = x.Название }), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetStatusJumps(int? statusId)

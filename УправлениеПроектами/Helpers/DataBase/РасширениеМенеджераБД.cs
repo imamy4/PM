@@ -44,5 +44,34 @@ namespace УправлениеПроектами
             return менеджерБД.Записи<Требование>()
                 .Where(x => true);
         }
+
+        
+        public static IEnumerable<Проект> АктуальныеПроекты(this IEnumerable<Проект> проекты)
+        {
+            return проекты.Where(проект => проект.ДатаНачала <= DateTime.Now
+                && проект.ДатаКонца >= DateTime.Now);
+        }
+
+
+        public static IEnumerable<Требование> НовыеТребования(this IEnumerable<Требование> требования)
+        {
+            return требования.Where(требование => требование.Статус.Новое);
+        }
+
+        public static IEnumerable<Требование> ОткрытыеТребования(this IEnumerable<Требование> требования)
+        {
+            return требования.Where(требование => требование.Статус.Новое || требование.Статус.ВРаботе());
+        }
+        
+        public static IEnumerable<Требование> ТребованияВРаботе(this IEnumerable<Требование> требования)
+        {
+            return требования.Where(требование => требование.Статус.ВРаботе());
+        }
+
+        public static IEnumerable<Требование> РешенныеТребования(this IEnumerable<Требование> требования)
+        {
+            return требования.Where(требование => требование.Статус.Решенное);
+        }
+    
     }
 }
