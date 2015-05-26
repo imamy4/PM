@@ -188,6 +188,21 @@ namespace УправлениеПроектами.Controllers
 
         #endregion
 
+        /// Рабочая страница требования
+        /// </summary>
+        /// <param name="id">Id требования</param>
+        /// <returns></returns>
+        public ActionResult Desktop(int id)
+        {
+            Требование требование = МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(id);
+            if (требование == null && !ТекущийПользователь.ЯвляетсяУчастникомПроекта(требование.Проект))
+            {
+                return View("_AuthError");
+            }
+
+            return View(требование);
+        }
+
         /// <summary>
         /// Список требований для UI создания сущности
         /// </summary>

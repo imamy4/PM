@@ -204,6 +204,7 @@ namespace УправлениеПроектами.Controllers
                     dateStart = активность != null ? активность.ДатаНачала.ToString("o") : string.Empty,
                 }
                 : null,
+                user = new { userName = ТекущийПользователь != null ? string.Format("{0} {1}", ТекущийПользователь.Имя, ТекущийПользователь.Фамилия) : string.Empty }
             },
             JsonRequestBehavior.AllowGet);
         }
@@ -221,5 +222,19 @@ namespace УправлениеПроектами.Controllers
 
             return this.Json(new { success }, JsonRequestBehavior.AllowGet);
         }
+       
+        public JsonResult StrartActivity(int userStoryId)
+        {
+            bool success = false;
+            Требование требование = МенеджерБД.ПолучитьЗаписьБДПоId<Требование>(userStoryId);
+
+            if (требование != null && ТекущийПользователь.ЯвляетсяУчастникомПроекта(требование.Проект))
+            {
+                success = ТекущийПользователь.ВзятьВРаботу(требование);
+            }
+
+            return this.Json(new { success }, JsonRequestBehavior.AllowGet);
+        }
+ 
     }
 }

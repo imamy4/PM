@@ -162,27 +162,27 @@ function getUserDesktopTasksGridPanel(storeUrl) {
         columns: [{
             xtype: 'rownumberer'
         }, {
-            header: 'Проект',
-            dataIndex: 'projectName',
-            summaryType: 'count',
-            summaryRenderer: function (value, summaryData, dataIndex) {
-                return Ext.String.format('<b>Количество требований: {0}</b>', value);
-            },
-            width: 140
-        }, {
             header: 'Название',
             dataIndex: 'name',
-            width: 140,
+            width: 170,
             renderer: function (value, metaData, record) {
                 if (record.data.statusIsResolved) {
                     return Ext.String.format('<strike>{0}</strike>', value);
                 }
                 return value;
             },
+            summaryType: 'count',
+            summaryRenderer: function (value, summaryData, dataIndex) {
+                return Ext.String.format('<b>Количество требований: {0}</b>', value);
+            },
             editor: {
                 xtype: 'textfield',
                 allowBlank: false
             }
+        }, {
+            header: 'Проект',
+            dataIndex: 'projectName',
+            width: 120
         }, {
             header: 'Важность',
             dataIndex: 'importance',
@@ -192,6 +192,13 @@ function getUserDesktopTasksGridPanel(storeUrl) {
                 hideTrigger: true,
                 allowBlank: false
             }
+        }, {
+            header: 'Статус',
+            dataIndex: 'statusId',
+            xtype: 'templatecolumn',
+            tpl: '{statusName}',
+            width: 80,
+            editor: statusCombobox
         }, {
             header: 'Оценка',
             dataIndex: 'estimate',
@@ -210,7 +217,7 @@ function getUserDesktopTasksGridPanel(storeUrl) {
         }, {
             header: 'Затрачено',
             dataIndex: 'spentTime',
-            width: 100,
+            width: 60,
             xtype: 'templatecolumn',
             tpl: '{spentTime} ч',
             summaryType: 'sum',
@@ -229,13 +236,6 @@ function getUserDesktopTasksGridPanel(storeUrl) {
             dataIndex: 'author_name',
             xtype: 'templatecolumn',
             tpl: '{author_name} {author_surname}'
-        }, {
-            header: 'Статус',
-            dataIndex: 'statusId',
-            xtype: 'templatecolumn',
-            tpl: '{statusName}',
-            width: 130,
-            editor: statusCombobox
         }, {
             header: 'Категория',
             dataIndex: 'categoryId',
@@ -281,25 +281,27 @@ function getUserDesktopSpentTimeGridPanel() {
         columns: [{
             xtype: 'rownumberer'
         }, {
-            header: 'Проект',
-            dataIndex: 'projectName',
-            width: 100
-        }, {
             header: 'Требования',
             dataIndex: 'userStoryName',
-            width: 100
+            width: 140
+        }, {
+            header: 'Проект',
+            dataIndex: 'projectName',
+            width: 120
         }, {
             header: 'Время начала',
             dataIndex: 'dateStart',
             xtype: 'datecolumn',
             format: 'd-m-Y H:i',
             flex: 1,
+            width: 80
         }, {
             header: 'Время конца',
             dataIndex: 'dateFinish',
             xtype: 'datecolumn',
             format: 'd-m-Y H:i',
             flex: 1,
+            width: 80
         }, {
             header: 'Затраченное время',
             dataIndex: 'activityTime',
@@ -309,7 +311,7 @@ function getUserDesktopSpentTimeGridPanel() {
             summaryRenderer: function (value, summaryData, dataIndex) {
                 return Ext.String.format('<b>Всего затрачено: {0} ч</b>', value);
             },
-            width: 140
+            width: 150
         }
 
 
