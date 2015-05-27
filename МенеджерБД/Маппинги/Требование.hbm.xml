@@ -8,6 +8,8 @@
     <property name="Описание" column="Description" />
     <property name="Оценка" column="Estimate" />
     <property name="Важность" column="Importance" />
+    <property name="ДатаСоздания" column="DateCreate" />
+    <property name="ДатаЗакрытия" column="DateResolved" not-null="false" />
 
     <many-to-one name="Проект" column="Project_id" />
     <many-to-one name="Спринт" column="Sprint_id" not-null="false" />

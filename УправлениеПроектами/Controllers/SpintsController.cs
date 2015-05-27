@@ -127,12 +127,12 @@ namespace УправлениеПроектами.Controllers
 
         public ActionResult Desktop(int id)
         {
-            if (!ТекущийПользователь.ЯвляетсяУчастникомПроекта(id))
+            Спринт спринт = МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id);
+
+            if (спринт != null && !ТекущийПользователь.ЯвляетсяУчастникомПроекта(спринт.Проект))
             {
                 return View("_AuthError");
             }
-
-            Спринт спринт = МенеджерБД.ПолучитьЗаписьБДПоId<Спринт>(id);
 
             return View(спринт);
         }
@@ -152,8 +152,9 @@ namespace УправлениеПроектами.Controllers
                            name = x.Название,
                            importance = x.Важность,
                            estimate = x.Оценка,
+                           spentTime = x.ЗатраченоВремени(),
                            executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
-                           executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                           executorName = x.Исполнитель() == null ? string.Empty : x.Исполнитель().ФИО,
                            statusId = x.Статус == null ? 0 : x.Статус.Id,
                            statusName = x.Статус == null ? string.Empty : x.Статус.Название,
                            statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,

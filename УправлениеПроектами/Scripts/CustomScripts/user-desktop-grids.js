@@ -1,4 +1,4 @@
-function getUserDesktopTasksGridPanel(storeUrl) {
+function GetUserDesktopTasksGridPanel(storeUrl) {
 
     var statusCombobox = Ext.create('Ext.form.field.ComboBox', {
         store: {
@@ -169,7 +169,7 @@ function getUserDesktopTasksGridPanel(storeUrl) {
                 if (record.data.statusIsResolved) {
                     return Ext.String.format('<strike>{0}</strike>', value);
                 }
-                return value;
+                return Ext.String.format('<a href="/UserStories/Desktop/{1}">{0}</a>', value, record.data.id);
             },
             summaryType: 'count',
             summaryRenderer: function (value, summaryData, dataIndex) {
@@ -249,8 +249,67 @@ function getUserDesktopTasksGridPanel(storeUrl) {
     return userDesktopTasksGridPanel;
 }
 
-function getUserDesktopSpentTimeGridPanel() {
-   
+function GetUserDesktopSpentTimeGridPanel(excludeColumns, storeUrl) {
+    if (!excludeColumns) {
+        excludeColumns = {};
+    }
+
+    var columns = [{ xtype: 'rownumberer' }];
+    if (!excludeColumns.userStoryName) {
+        columns.push( {
+            header: 'Требования',
+            dataIndex: 'userStoryName',
+            width: 140
+        });
+    }
+    if (!excludeColumns.projectName) {
+        columns.push({
+            header: 'Проект',
+            dataIndex: 'projectName',
+            width: 120
+        });
+    }
+    if (!excludeColumns.userName) {
+        columns.push({
+            header: 'Пользователь',
+            dataIndex: 'userName',
+            width: 120
+        });
+    }
+    if (!excludeColumns.dateStart) {
+        columns.push({
+            header: 'Время начала',
+            dataIndex: 'dateStart',
+            xtype: 'datecolumn',
+            format: 'd-m-Y H:i',
+            flex: 1,
+            width: 80
+        });
+    }
+    if (!excludeColumns.dateFinish) {
+        columns.push({
+            header: 'Время конца',
+            dataIndex: 'dateFinish',
+            xtype: 'datecolumn',
+            format: 'd-m-Y H:i',
+            flex: 1,
+            width: 80
+        });
+    }
+    if (!excludeColumns.activityTime) {
+        columns.push({
+            header: 'Затраченное время',
+            dataIndex: 'activityTime',
+            xtype: 'templatecolumn',
+            tpl: '{activityTime} ч',
+            summaryType: 'sum',
+            summaryRenderer: function (value, summaryData, dataIndex) {
+                return Ext.String.format('<b>Всего затрачено: {0} ч</b>', value);
+            },
+            width: 150
+        });
+    }
+
     var userDesktopSpentTimeGridPanel = Ext.create('Ext.grid.Panel', {
         stripeRows: true,
         border: false,
@@ -261,13 +320,14 @@ function getUserDesktopSpentTimeGridPanel() {
             xtype: 'jsonstore',
             autoLoad: true,
             proxy: new Ext.data.HttpProxy({
-                url: '/User/GetLastMonthActivity',
+                url: storeUrl,
                 method: 'GET'
             }),
             fields:
             [
                 'projectName',
                 'userStoryName',
+                'userName',
                 'dateStart',
                 'dateFinish',
                 'activityTime'
@@ -278,52 +338,14 @@ function getUserDesktopSpentTimeGridPanel() {
                 direction: 'DESC'
             }
         },
-        columns: [{
-            xtype: 'rownumberer'
-        }, {
-            header: 'Требования',
-            dataIndex: 'userStoryName',
-            width: 140
-        }, {
-            header: 'Проект',
-            dataIndex: 'projectName',
-            width: 120
-        }, {
-            header: 'Время начала',
-            dataIndex: 'dateStart',
-            xtype: 'datecolumn',
-            format: 'd-m-Y H:i',
-            flex: 1,
-            width: 80
-        }, {
-            header: 'Время конца',
-            dataIndex: 'dateFinish',
-            xtype: 'datecolumn',
-            format: 'd-m-Y H:i',
-            flex: 1,
-            width: 80
-        }, {
-            header: 'Затраченное время',
-            dataIndex: 'activityTime',
-            xtype: 'templatecolumn',
-            tpl: '{activityTime} ч',
-            summaryType: 'sum',
-            summaryRenderer: function (value, summaryData, dataIndex) {
-                return Ext.String.format('<b>Всего затрачено: {0} ч</b>', value);
-            },
-            width: 150
-        }
-
-
-        ]
+        columns: columns
     });
 
     return userDesktopSpentTimeGridPanel;
 
 }
 
-
-function getUserDesktopProjectInfoGridPanel() {
+function GetUserDesktopProjectInfoGridPanel() {
 
     var userDesktopProjectInfoGridPanel = Ext.create('Ext.grid.Panel', {
         stripeRows: true,
@@ -347,7 +369,8 @@ function getUserDesktopProjectInfoGridPanel() {
                 'resolvedUsCount',
                 'assigmentUsCount',
                 'notAssigmentusCount',
-                'sumEstimate'
+                'sumEstimate',
+                'spentTime'
             ],
             sorters:
             {
@@ -374,6 +397,15 @@ function getUserDesktopProjectInfoGridPanel() {
             format: 'd-m-Y',
             flex: 1,
         }, {
+            header: 'Всего затрачено времени',
+            dataIndex: 'spentTime',
+            flex: 1,
+        }, {
+            header: 'Суммарная оценка открытых задач',
+            dataIndex: 'sumEstimate',
+            width: 120,
+            flex: 1,
+        }, {
             header: 'Всего задач',
             dataIndex: 'usCount',
             flex: 1,
@@ -397,11 +429,7 @@ function getUserDesktopProjectInfoGridPanel() {
             header: 'Неназначенных задач',
             dataIndex: 'notAssigmentusCount',
             flex: 1,
-        }, {
-            header: 'Суммарная оценка задач',
-            dataIndex: 'sumEstimate',
-            flex: 1,
-        }, {
+        },{
             xtype: 'actioncolumn',
             width: 30,
             items: [{

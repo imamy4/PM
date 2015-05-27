@@ -1,4 +1,5 @@
-﻿@model МенеджерБД.Домен.Требование
+﻿@using УправлениеПроектами;
+@model МенеджерБД.Домен.Требование
 
 @{
     Layout = null;
@@ -17,7 +18,7 @@
     <script src="/Scripts/ExtJS/ext-all-debug.js" type="text/javascript"></script>
     <script src="/Scripts/ExtJS/locale/ext-lang-ru.js" type="text/javascript"></script>
 </head>
-<body>
+<body link="black" vlink="black" alink="#303030">
     <div>
         <div class="container">
             <div id="desktop">
@@ -29,14 +30,36 @@
             var userStoryId = @Model.Id;
             var defaultValues = {
                 projectId: @Model.Проект.Id,
-                categoryId: @Model.Категория.Id,
                 name: "@Model.Название",
                 description: "@Model.Описание",
-                estimate: @Model.Оценка,
-                importance: @Model.Важность
+                categoryId: 0,
+                estimate: @Model.Оценка.ToString().Replace(',', '.'),
+                importance: @Model.Важность,
+                statusId: @Model.Статус.Id,
+                statusName: "@Model.Статус.Название",
+                executorId: 0,
+                executorName: "",
+                authorId: "@Model.Автор.Id",
+                authorName: "@Model.Автор.ФИО",
             };
         </script>
+        @if (@Model.Исполнитель() != null)
+        {
+            <script type="text/javascript">
+                defaultValues.executorId =@Model.Исполнитель().Id;
+                defaultValues.executorName = "@Model.Исполнитель().ФИО";
+            </script>
+        }
+        @if (@Model.Категория != null)
+        {
+            <script type="text/javascript">
+                defaultValues.categoryId = @Model.Категория.Id;
+            </script>
+        }
+
+
         <script src="/Scripts/CustomScripts/main-menu-panel.js" type="text/javascript"></script>
+        <script src="/Scripts/CustomScripts/user-desktop-grids.js" type="text/javascript"></script>
         <script src="/Scripts/CustomScripts/win-create-user-story.js" type="text/javascript"></script>
         <script src="/Scripts/CustomScripts/user-story-desktop.js" type="text/javascript"></script>
     </div>

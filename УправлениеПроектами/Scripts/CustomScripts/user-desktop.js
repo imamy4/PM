@@ -1,8 +1,8 @@
 Ext.onReady(function () {
-    var assigmentTasksGrid = getUserDesktopTasksGridPanel('/User/GetAssignmentedUserStories');
-    var createdTasksGrid = getUserDesktopTasksGridPanel('/User/GetCreatedUserStories');
-    var spentTimeGrid = getUserDesktopSpentTimeGridPanel();
-    var statsPanel = getUserDesktopProjectInfoGridPanel();
+    var assigmentTasksGrid = GetUserDesktopTasksGridPanel('/User/GetAssignmentedUserStories');
+    var createdTasksGrid = GetUserDesktopTasksGridPanel('/User/GetCreatedUserStories');
+    var spentTimeGrid = GetUserDesktopSpentTimeGridPanel({ userName: true }, '/User/GetLastMonthActivity');
+    var statsPanel = GetUserDesktopProjectInfoGridPanel();
     var userTasksPanel = Ext.create('Ext.Panel', {
         title: 'Требования',
         bodyStyle: 'border-radius: 0 0 10px 10px;',

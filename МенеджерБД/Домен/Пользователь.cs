@@ -19,6 +19,15 @@ namespace МенеджерБД.Домен
         public virtual int Id { get; set; }
         public virtual string Имя { get; set; }
         public virtual string Фамилия { get; set; }
+
+        public virtual string ФИО
+        {
+            get
+            {
+                return string.Format("{0} {1}", Имя, Фамилия);
+            }
+        }
+
         public virtual string Email { get; set; }
         public virtual string ХэшПароля { get; set; }
         public virtual DateTime ДатаРегистрации { get; set; }

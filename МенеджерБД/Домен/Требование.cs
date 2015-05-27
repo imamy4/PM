@@ -20,7 +20,10 @@ namespace МенеджерБД.Домен
         public virtual string Описание { get; set; }
         public virtual decimal Оценка { get; set; }
         public virtual int Важность { get; set; }
-        
+
+        public virtual DateTime ДатаСоздания { get; set; }
+        public virtual DateTime ДатаЗакрытия { get; set; }
+
         public virtual Проект Проект { get; set; }
         public virtual Спринт Спринт { get; set; }
         public virtual Пользователь Автор { get; set; }

@@ -154,6 +154,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Base\BaseEntityController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserStoriesController.cs" />
@@ -719,10 +720,12 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CustomScripts\chart-burndown.js" />
     <Content Include="Scripts\CustomScripts\grid-backlog.js" />
     <Content Include="Scripts\CustomScripts\grid-user-stories.js" />
     <Content Include="Scripts\CustomScripts\grid-sprints.js" />
     <Content Include="Scripts\CustomScripts\main-menu-panel.js" />
+    <Content Include="Scripts\CustomScripts\sprint-desktop.js" />
     <Content Include="Scripts\CustomScripts\user-story-desktop.js" />
     <Content Include="Scripts\CustomScripts\user-desktop-grids.js" />
     <Content Include="Scripts\CustomScripts\user-desktop.js" />

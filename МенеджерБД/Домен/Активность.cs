@@ -13,11 +13,11 @@ namespace МенеджерБД.Домен
         public virtual DateTime ДатаНачала { get; set; }
         public virtual DateTime ДатаКонца { get; set; }
 
-        public virtual double ЗатраченноеВремя
+        public virtual decimal ЗатраченноеВремя
         {
             get
             {
-                return Math.Round(Math.Max((ДатаКонца - ДатаНачала).TotalHours, 0), 2);
+                return Math.Round(Math.Max(Convert.ToDecimal((ДатаКонца - ДатаНачала).TotalHours), 0), 2);
             }
         }
 

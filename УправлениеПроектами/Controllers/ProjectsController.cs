@@ -218,7 +218,8 @@ namespace УправлениеПроектами.Controllers
                                 resolvedUsCount = x.КоличествоРешенныхТребований(),
                                 assigmentUsCount = x.КоличествоНазначенныхТребований(),
                                 notAssigmentusCount = x.КоличествоНеНазначенныхТребований(),
-                                sumEstimate = x.СуммарнаяОценкаРабот()
+                                sumEstimate = x.СуммарнаяОценкаРаботПоОткрытымТребованиям(),
+                                spentTime = x.ЗатраченоВремени()
                             }),
                 JsonRequestBehavior.AllowGet);
         }

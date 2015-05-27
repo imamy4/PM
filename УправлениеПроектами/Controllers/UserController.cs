@@ -126,7 +126,7 @@ namespace УправлениеПроектами.Controllers
                                     estimate = x.Оценка,
                                     spentTime  = x.Активности.Sum(активность => активность.ЗатраченноеВремя),
                                     executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
-                                    executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                                    executorName = x.Исполнитель() == null ? string.Empty : x.Исполнитель().ФИО,
                                     statusId = x.Статус == null ? 0 : x.Статус.Id,
                                     statusName = x.Статус == null ? string.Empty : x.Статус.Название,
                                     statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,
@@ -162,7 +162,7 @@ namespace УправлениеПроектами.Controllers
                                     estimate = x.Оценка,
                                     spentTime = x.Активности.Sum(активность => активность.ЗатраченноеВремя),
                                     executorId = x.Исполнитель() == null ? 0 : x.Исполнитель().Id,
-                                    executorName = x.Исполнитель() == null ? string.Empty : string.Format("{0} {1}", x.Исполнитель().Имя, x.Исполнитель().Фамилия),
+                                    executorName = x.Исполнитель() == null ? string.Empty : x.Исполнитель().ФИО,
                                     statusId = x.Статус == null ? 0 : x.Статус.Id,
                                     statusName = x.Статус == null ? string.Empty : x.Статус.Название,
                                     statusIsResolved = x.Статус == null ? false : x.Статус.Решенное,
@@ -176,6 +176,11 @@ namespace УправлениеПроектами.Controllers
 
         public JsonResult GetLastMonthActivity()
         {
+            if (ТекущийПользователь == null)
+            {
+                return this.Json(new List<string>(), JsonRequestBehavior.AllowGet);
+            }
+
             IEnumerable<Активность> активности = ТекущийПользователь.Активности.Where(активность => активность.ДатаКонца > new  DateTime(DateTime.Now.Year, DateTime.Now.Month, 1));
 
             return this.Json(активности.Select(активность =>
@@ -183,6 +188,7 @@ namespace УправлениеПроектами.Controllers
                 {
                     projectName = активность.Требование.Проект.Название,
                     userStoryName = активность.Требование.Название,
+                    userName = ТекущийПользователь.ФИО,
                     dateStart = активность.ДатаНачала.ToString("o"),
                     dateFinish = активность.ДатаКонца.ToString("o"),
                     activityTime = активность.ЗатраченноеВремя
@@ -204,7 +210,7 @@ namespace УправлениеПроектами.Controllers
                     dateStart = активность != null ? активность.ДатаНачала.ToString("o") : string.Empty,
                 }
                 : null,
-                user = new { userName = ТекущийПользователь != null ? string.Format("{0} {1}", ТекущийПользователь.Имя, ТекущийПользователь.Фамилия) : string.Empty }
+                user = new { userName = ТекущийПользователь != null ? ТекущийПользователь.ФИО : string.Empty }
             },
             JsonRequestBehavior.AllowGet);
         }
